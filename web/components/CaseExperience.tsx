@@ -446,8 +446,11 @@ export function CaseExperience({ deepDive }: { deepDive?: React.ReactNode }) {
               </button>
               <button
                 type="button"
-                disabled={index === steps.length - 1}
-                onClick={() => dispatch({ type: "next" })}
+                onClick={() =>
+                  index === steps.length - 1
+                    ? chooseMode("challenge")
+                    : dispatch({ type: "next" })
+                }
               >
                 {ui(locale, "action.next")} <span aria-hidden="true">→</span>
               </button>
