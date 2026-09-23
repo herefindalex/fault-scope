@@ -1,0 +1,11 @@
+## What the caller actually knows
+
+In this teaching model, the caller did not receive a completion response before its deadline. The transport cannot establish that the request definitely never left. That observation alone does not establish whether a VM exists.
+
+## Identity belongs to a logical operation
+
+An attempt is a transmission. The logical operation is the intended creation. The stronger receiver contract only protects compatible repeats carrying the **same identity P**. A caller that crashes and loses P, or a hidden SDK that retries under a new identity, can step outside that protection.
+
+## Contract boundaries still matter
+
+The receiver must define how long it retains P, what counts as a compatible spec, and what happens with concurrent attempts. A `NOT_FOUND` result from a query may reflect eventual consistency; it does not automatically prove that the original create attempt had no effect. Reconciliation can help, but its evidence is only as strong as the query contract.

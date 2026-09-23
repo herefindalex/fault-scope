@@ -1,0 +1,46 @@
+{
+  "id": "fs-c01",
+  "slug": "should-you-send-it-again",
+  "status": "published",
+  "guided_entry": "review",
+  "challenge_entry": "weak-contract",
+  "steps": [
+    "review",
+    "evidence",
+    "worlds",
+    "property",
+    "weak-contract",
+    "strong-contract",
+    "scope-challenge",
+    "positive-control",
+    "negative-control",
+    "transfer",
+    "remaining",
+    "recap"
+  ],
+  "visual_states": [
+    "possible-worlds",
+    "weak-counterexample",
+    "same-identity-progress"
+  ],
+  "required_visual_states": [
+    "possible-worlds",
+    "weak-counterexample",
+    "same-identity-progress"
+  ],
+  "semantic_anchors": [
+    "fs-c01.retry-independent-attempt",
+    "fs-c01.keep-unresolved",
+    "fs-c01.retry-same-logical-operation",
+    "fs-c01.retry-with-new-logical-operation"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": [
+    "property",
+    "counterexample",
+    "positive-control",
+    "scope-challenge",
+    "remaining",
+    "transfer"
+  ]
+}
