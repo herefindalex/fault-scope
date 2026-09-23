@@ -61,7 +61,18 @@ for (const locale of locales) {
       }
     }
 
-    await page.getByRole("button", { name: ui["case.challenge"] }).click();
+    const finalNext = page.getByRole("button", {
+      name: ui["action.next"],
+      exact: true,
+    });
+    await expect(finalNext).toBeEnabled();
+    await finalNext.click();
+    await expect(page).toHaveURL(
+      new RegExp(`/${locale.id}/${casePath}\\?mode=challenge$`),
+    );
+    await expect(
+      page.getByRole("button", { name: ui["case.challenge"] }),
+    ).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator(".challenge-panel")).toContainText(
       content.messages["challenge.intro"],
     );
