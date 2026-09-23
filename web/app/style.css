@@ -950,3 +950,136 @@ pre {
     max-width: 110px;
   }
 }
+
+.cases-index {
+  padding-block: 72px 100px;
+}
+
+.cases-index h1 {
+  font-size: clamp(2.5rem, 6vw, 4.4rem);
+  line-height: 1.05;
+  margin: 0 0 36px;
+}
+
+.case-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.case-index-grid a {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.case-index-grid a:hover,
+.case-index-grid a:focus-visible {
+  border-color: var(--teal);
+}
+
+.case-index-grid h2 {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+.case-index-grid p {
+  color: var(--muted);
+  margin: 0 0 auto;
+}
+
+.case-index-grid a > span:last-child {
+  align-self: flex-end;
+  color: var(--teal);
+  font-size: 1.5rem;
+}
+
+.case-visual {
+  margin: 24px 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: #f3f7f3;
+}
+
+.case-visual figcaption {
+  color: var(--teal-dark);
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.visual-track,
+.durability-domain {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.visual-track span,
+.durability-domain span {
+  text-align: end;
+}
+
+.visual-authority {
+  color: var(--teal-dark);
+}
+
+.durability-domain {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.durability-domain span {
+  text-align: start;
+}
+
+.domain-boundary {
+  margin: 14px 0;
+  padding-inline-start: 12px;
+  border-inline-start: 3px solid var(--orange);
+}
+
+.case-recap {
+  padding-inline-start: 22px;
+}
+
+.case-recap li {
+  margin-bottom: 10px;
+}
+
+.language-case-grid {
+  display: grid;
+  gap: 28px;
+  margin-top: 64px;
+}
+
+.language-case-card {
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.language-case-card h2 {
+  margin: 0 0 12px;
+}
+
+.language-case-card .code-frame {
+  margin-block: 22px;
+}
+
+@media (max-width: 900px) {
+  .case-index-grid {
+    grid-template-columns: 1fr;
+  }
+}

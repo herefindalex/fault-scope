@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Przypadek 01",
+  "nav.cases": "Przypadki",
   "nav.lenses": "Języki kodu",
   "nav.about": "O projekcie",
   "nav.home": "Strona główna błęduScope",
-  "footer.preview": "FaultScope · Podgląd przypadku 01",
+  "footer.preview": "FaultScope · Podgląd",
   "footer.method": "Powód na podstawie dowodów, umowy i majątku.",
   "locale.label": "Język",
   "locale.choose": "Wybierz język",

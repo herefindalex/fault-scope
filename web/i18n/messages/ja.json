@@ -1,9 +1,9 @@
 {
-  "nav.cases": "ケース 01",
+  "nav.cases": "ケース",
   "nav.lenses": "コードレンズ",
   "nav.about": "概要",
   "nav.home": "FaultScope ホーム",
-  "footer.preview": "FaultScope · ケース 01 プレビュー",
+  "footer.preview": "FaultScope · プレビュー",
   "footer.method": "証拠、契約、性質から推論する。",
   "locale.label": "表示言語",
   "locale.choose": "表示言語を選択",

@@ -1,27 +1,13 @@
 # Product overview
 
-FaultScope is an interactive lab for engineers who need to reason about
-distributed application correctness. A remote call can have an effect even
-when its completion response never reaches the caller. Ordinary-looking retry
-code then needs more than a pattern name to judge it.
+FaultScope is an interactive lab for engineers who need to reason about distributed application correctness. Ordinary-looking code can be unsafe when the completion response, current authority, or durable publication obligation is unclear. A pattern name alone does not decide whether a specific contract preserves a property.
 
-The current published lesson is [Case 01](../cases/fs-c01.md), about an
-ambiguous `CreateVM` request. **Guided** mode reveals evidence and contracts
-step by step. **Challenge** mode asks for a decision with less guidance.
-**Deep Dive** explains the boundaries of the synthetic contract. These three
-modes share one canonical Case and browser-stored progress.
+Three [authored Cases](../cases/README.md) are published:
 
-The [Six Questions](six-questions.md) organize the reasoning: what is
-established, what the contract allows, what property matters, where it is
-enforced, whether a counterexample remains, and what fails after repair.
-FaultScope also asks who has authority to decide an outcome, what must be
-durable, and which failure boundary invalidates an assumption. Case 01 treats
-some of these through identity continuity and receiver scope; it is not yet a
-general course on every distributed-system failure.
+- [Case 01](../cases/fs-c01.md): an ambiguous `CreateVM` response and the identity of a retry.
+- [Case 02](../cases/fs-c02.md): a stale worker that may still execute after authority moved to another generation.
+- [Case 03](../cases/fs-c03.md): a database commit separated from event publication by a crash gap.
 
-**Human Locale** changes prose and layout. **Code Lens** changes the displayed
-source artifact. They are independent: Japanese explanations can accompany
-C++ source. All 20 locales have complete UI and Case 01 catalogs. The 19 non-English locales are [unreviewed beta content](../localization/quality-policy.md).
+**Guided** reveals evidence and contracts step by step. **Challenge** asks for a decision with less guidance. **Deep Dive** examines the repair's limits. Each Case has its own browser-stored progress. The [Six Questions](six-questions.md) organize reasoning: what was established, what the contract allows, which property matters, where it is enforced, whether the counterexample remains, and what can still fail after repair.
 
-See [non-goals](non-goals.md) for the current product boundary and
-[accessibility](accessibility.md) for implemented behavior and remaining checks.
+**Human Locale** changes prose and layout. **Code Lens** changes the displayed source artifact; the choices are independent. All 20 locales have complete UI and Case 01–03 catalogs. The 19 non-English locales are [unreviewed beta content](../localization/quality-policy.md). See [non-goals](non-goals.md) and [accessibility](accessibility.md).

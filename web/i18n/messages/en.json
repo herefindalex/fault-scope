@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Case 01",
+  "nav.cases": "Cases",
   "nav.lenses": "Code lenses",
   "nav.about": "About",
   "nav.home": "FaultScope home",
-  "footer.preview": "FaultScope · Case 01 preview",
+  "footer.preview": "FaultScope · Preview",
   "footer.method": "Reason from evidence, contract, and property.",
   "locale.label": "Human language",
   "locale.choose": "Choose human language",

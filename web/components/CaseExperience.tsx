@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   caseReducer,
-  initialCaseState,
   questionOptions,
   steps,
   type CaseAction,
@@ -11,42 +9,24 @@ import {
   type Step,
 } from "../src/case";
 import { caseCopy, ui, type CaseMessageKey } from "../i18n/catalog";
-import { formatNumber } from "../i18n/locale";
 import { CodeBlock } from "./CodeBlock";
+import {
+  CaseShell,
+  StepNavigation,
+  StepStatus,
+  ReasoningRail as SharedReasoningRail,
+} from "./CaseShell";
+import {
+  caseProgressKey as progressKeyFor,
+  parseStoredProgress,
+  useCaseProgress,
+} from "./useCaseProgress";
 import { useLocale } from "./LocaleProvider";
 
-export const caseProgressKey = "faultscope.v1.caseProgress.fs-c01";
+export const caseProgressKey = progressKeyFor("fs-c01");
 
 export function parseCaseProgress(raw: string | null): CaseState | null {
-  if (!raw) return null;
-  try {
-    const data: unknown = JSON.parse(raw);
-    if (!data || typeof data !== "object") return null;
-    const value = data as Record<string, unknown>;
-    if (!steps.includes(value.step as Step)) return null;
-    if (
-      value.mode !== "guided" &&
-      value.mode !== "challenge" &&
-      value.mode !== "deep-dive"
-    )
-      return null;
-    if (
-      !value.answers ||
-      typeof value.answers !== "object" ||
-      Array.isArray(value.answers)
-    )
-      return null;
-    const answers = value.answers as Record<string, unknown>;
-    if (!Object.values(answers).every((answer) => typeof answer === "string"))
-      return null;
-    return {
-      mode: value.mode,
-      step: value.step as Step,
-      answers: answers as Record<string, string>,
-    };
-  } catch {
-    return null;
-  }
+  return parseStoredProgress(raw, steps);
 }
 
 function Answer({
@@ -82,38 +62,22 @@ function Answer({
   );
 }
 
-function ReasoningRail({ step }: { step: Step }) {
+function Case01Rail({ step }: { step: Step }) {
   const { locale } = useLocale();
   const index = steps.indexOf(step);
   const c = (key: CaseMessageKey) => caseCopy(locale, key);
   return (
-    <aside className="reasoning-rail" aria-label={ui(locale, "reasoning.rail")}>
-      <p className="eyebrow">{ui(locale, "reasoning.rail")}</p>
-      <div>
-        <span className="rail-label">
-          01 / {ui(locale, "reasoning.evidence")}
-        </span>
-        <p>{index >= 1 ? c("observation") : ui(locale, "reasoning.inspect")}</p>
-      </div>
-      <div>
-        <span className="rail-label">
-          02 / {ui(locale, "reasoning.contract")}
-        </span>
-        <p>
-          {index >= 5
-            ? c("strongContract")
-            : index >= 4
-              ? c("weakContract")
-              : ui(locale, "reasoning.notEstablished")}
-        </p>
-      </div>
-      <div>
-        <span className="rail-label">
-          03 / {ui(locale, "reasoning.property")}
-        </span>
-        <p>{index >= 3 ? c("property") : ui(locale, "reasoning.reveal")}</p>
-      </div>
-    </aside>
+    <SharedReasoningRail
+      evidence={index >= 1 ? c("observation") : ui(locale, "reasoning.inspect")}
+      contract={
+        index >= 5
+          ? c("strongContract")
+          : index >= 4
+            ? c("weakContract")
+            : ui(locale, "reasoning.notEstablished")
+      }
+      property={index >= 3 ? c("property") : ui(locale, "reasoning.reveal")}
+    />
   );
 }
 
@@ -353,110 +317,43 @@ function GuidedStep({
 
 export function CaseExperience({ deepDive }: { deepDive?: React.ReactNode }) {
   const { locale } = useLocale();
-  const [state, setState] = useState<CaseState>(initialCaseState);
-  useEffect(() => {
-    const restored =
-      parseCaseProgress(window.localStorage.getItem(caseProgressKey)) ??
-      initialCaseState;
-    const mode = new URLSearchParams(window.location.search).get("mode");
-    setState(
-      mode === "guided" || mode === "challenge" || mode === "deep-dive"
-        ? { ...restored, mode }
-        : restored,
-    );
-  }, []);
+  const { state, update, chooseMode } = useCaseProgress("fs-c01", steps);
   function dispatch(action: CaseAction) {
-    setState((current) => {
-      const next = caseReducer(current, action);
-      window.localStorage.setItem(caseProgressKey, JSON.stringify(next));
-      return next;
-    });
-  }
-  function chooseMode(mode: CaseState["mode"]) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("mode", mode);
-    window.history.replaceState(null, "", url);
-    dispatch({ type: "mode", mode });
+    update((current) => caseReducer(current, action));
   }
   const c = (key: CaseMessageKey) => caseCopy(locale, key);
   const index = steps.indexOf(state.step);
   return (
-    <main className="case-page page-wrap">
-      <div className="case-topline">
-        <span>{ui(locale, "nav.cases")} / FS-C01</span>
-        <span>{c("topline")}</span>
-      </div>
-      <div className="case-intro">
-        <p className="eyebrow">{c("eyebrow")}</p>
-        <h1>{c("title")}</h1>
-        <p>{c("subtitle")}</p>
-      </div>
-      <div
-        className="mode-tabs"
-        role="group"
-        aria-label={ui(locale, "case.learningMode")}
-      >
-        {(["guided", "challenge", "deep-dive"] as const).map((mode) => (
-          <button
-            key={mode}
-            type="button"
-            aria-pressed={state.mode === mode}
-            onClick={() => chooseMode(mode)}
-          >
-            {ui(
-              locale,
-              mode === "deep-dive"
-                ? "case.deepDive"
-                : mode === "guided"
-                  ? "case.guided"
-                  : "case.challenge",
-            )}
-          </button>
-        ))}
-      </div>
+    <CaseShell
+      caseId="fs-c01"
+      topline={c("topline")}
+      eyebrow={c("eyebrow")}
+      title={c("title")}
+      subtitle={c("subtitle")}
+      mode={state.mode}
+      onModeChange={chooseMode}
+    >
       {state.mode === "guided" && (
         <div className="case-layout">
           <section className="lesson-panel" aria-live="polite">
-            <div className="step-status">
-              <span>
-                {ui(locale, "case.step", {
-                  current: formatNumber(locale, index + 1),
-                  total: formatNumber(locale, steps.length),
-                })}
-              </span>
-              <div className="progress-track">
-                <span
-                  style={{ width: `${((index + 1) / steps.length) * 100}%` }}
-                />
-              </div>
-            </div>
+            <StepStatus index={index} total={steps.length} />
             <h2>{c(`step.${state.step}.title`)}</h2>
             <GuidedStep
               state={state}
               answer={(key, value) => dispatch({ type: "answer", key, value })}
             />
-            <div className="step-nav">
-              <button
-                type="button"
-                disabled={index === 0}
-                onClick={() => dispatch({ type: "previous" })}
-              >
-                <span aria-hidden="true">←</span>{" "}
-                {ui(locale, "action.previous")}
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  index === steps.length - 1
-                    ? chooseMode("challenge")
-                    : dispatch({ type: "next" })
-                }
-              >
-                {ui(locale, "action.next")} <span aria-hidden="true">→</span>
-              </button>
-            </div>
+            <StepNavigation
+              index={index}
+              total={steps.length}
+              onPrevious={() => dispatch({ type: "previous" })}
+              onNext={() =>
+                index === steps.length - 1
+                  ? chooseMode("challenge")
+                  : dispatch({ type: "next" })
+              }
+            />
           </section>
-          <ReasoningRail step={state.step} />
+          <Case01Rail step={state.step} />
         </div>
       )}
       {state.mode === "challenge" && (
@@ -497,6 +394,6 @@ export function CaseExperience({ deepDive }: { deepDive?: React.ReactNode }) {
             ))}
         </article>
       )}
-    </main>
+    </CaseShell>
   );
 }

@@ -1,0 +1,40 @@
+{
+  "id": "fs-c03",
+  "slug": "database-committed-where-is-event",
+  "status": "published",
+  "guided_entry": "review",
+  "challenge_entry": "durable-question",
+  "steps": [
+    "review",
+    "db-commit",
+    "crash-gap",
+    "durable-question",
+    "domains",
+    "property",
+    "counterexample",
+    "durable-intent",
+    "repaired-domain",
+    "rollback",
+    "relay",
+    "relay-crash",
+    "duplicates",
+    "property-preserved",
+    "remaining",
+    "transfer",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.yes", "option.no", "option.needMore"]
+  },
+  "visual_states": ["initial-dual-write", "db-committed", "crash-gap", "durable-intent", "relay-publishing", "broker-accepted", "relay-crash", "duplicate-publication"],
+  "required_visual_states": ["crash-gap", "durable-intent", "broker-accepted", "duplicate-publication"],
+  "semantic_anchors": [
+    "fs-c03.split-dual-write",
+    "fs-c03.business-state-commit",
+    "fs-c03.durable-publication-intent",
+    "fs-c03.relay-publish",
+    "fs-c03.mark-publication-complete"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": ["property", "counterexample", "positive-control", "scope-challenge", "remaining", "transfer"]
+}

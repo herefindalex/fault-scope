@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Tình huống 01",
+  "nav.cases": "Các tình huống",
   "nav.lenses": "Ngôn ngữ mã",
   "nav.about": "Giới thiệu",
   "nav.home": "nhà FaultScope",
-  "footer.preview": "FaultScope · Xem trước trường hợp 01",
+  "footer.preview": "FaultScope · Bản xem trước",
   "footer.method": "Lý do từ bằng chứng, hợp đồng và tài sản.",
   "locale.label": "Ngôn ngữ",
   "locale.choose": "Chọn ngôn ngữ",

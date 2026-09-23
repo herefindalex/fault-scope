@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Случай 01",
+  "nav.cases": "Случаи",
   "nav.lenses": "Языки кода",
   "nav.about": "О проекте",
   "nav.home": "FaultScope домашняя",
-  "footer.preview": "FaultScope · Предварительный просмотр случая 01",
+  "footer.preview": "FaultScope · Предпросмотр",
   "footer.method": "Основание на доказательствах, контракте и собственности.",
   "locale.label": "Язык",
   "locale.choose": "Выбрать язык",

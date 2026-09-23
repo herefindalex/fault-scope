@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { LocaleEntry } from "../../../../components/LocaleEntry";
-import caseData from "../../../../src/case-data.json";
+import { getCaseBySlug, visibleCases } from "../../../../src/cases";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return caseData.status === "published" ? [{ slug: caseData.slug }] : [];
+  return visibleCases().map((definition) => ({ slug: definition.slug }));
 }
 export default async function LegacyCasePage({
   params,
@@ -12,7 +12,11 @@ export default async function LegacyCasePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  if (slug !== caseData.slug) notFound();
+  if (
+    !getCaseBySlug(slug) ||
+    !visibleCases().some((item) => item.slug === slug)
+  )
+    notFound();
   const path = `cases/${slug}`;
   return (
     <main className="page-wrap locale-entry">

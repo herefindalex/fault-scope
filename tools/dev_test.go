@@ -23,4 +23,22 @@ func TestDeveloperOptions(t *testing.T) {
 	if _, err := parseDevOptions([]string{"--locale", "xx-INVALID"}); err == nil {
 		t.Fatal("accepted unknown locale")
 	}
+	for _, entry := range []struct {
+		selector string
+		slug     string
+	}{
+		{"fs-c02", "can-the-old-worker-still-commit"},
+		{"can-the-old-worker-still-commit", "can-the-old-worker-still-commit"},
+		{"fs-c03", "database-committed-where-is-event"},
+		{"database-committed-where-is-event", "database-committed-where-is-event"},
+	} {
+		options, err := parseDevOptions([]string{"--case", entry.selector, "--mode", "guided"})
+		if err != nil {
+			t.Fatalf("%s: %v", entry.selector, err)
+		}
+		want := "http://localhost:3000/en/cases/" + entry.slug + "/?mode=guided"
+		if got := options.target("http://localhost:3000"); got != want {
+			t.Errorf("%s: target %q, want %q", entry.selector, got, want)
+		}
+	}
 }

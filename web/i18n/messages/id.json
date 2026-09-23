@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Kasus 01",
+  "nav.cases": "Kasus",
   "nav.lenses": "Bahasa kode",
   "nav.about": "Tentang",
   "nav.home": "FaultScope rumah",
-  "footer.preview": "FaultScope · Pratinjau Kasus 01",
+  "footer.preview": "FaultScope · Pratinjau",
   "footer.method": "Alasan dari bukti, kontrak, dan properti.",
   "locale.label": "Bahasa",
   "locale.choose": "Pilih bahasa",

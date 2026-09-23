@@ -20,6 +20,24 @@ type devOptions struct {
 	mode          string
 }
 
+var devCaseSlugs = map[string]string{
+	"fs-c01": "should-you-send-it-again",
+	"fs-c02": "can-the-old-worker-still-commit",
+	"fs-c03": "database-committed-where-is-event",
+}
+
+func devCaseSlug(value string) (string, bool) {
+	if slug, ok := devCaseSlugs[value]; ok {
+		return slug, true
+	}
+	for _, slug := range devCaseSlugs {
+		if value == slug {
+			return slug, true
+		}
+	}
+	return "", false
+}
+
 func parseDevOptions(args []string) (devOptions, error) {
 	var options devOptions
 	for i := 0; i < len(args); i++ {
@@ -50,8 +68,10 @@ func parseDevOptions(args []string) (devOptions, error) {
 			return options, fmt.Errorf("unknown development option %s", args[i])
 		}
 	}
-	if options.caseID != "" && options.caseID != "fs-c01" {
-		return options, fmt.Errorf("unknown case %s", options.caseID)
+	if options.caseID != "" {
+		if _, ok := devCaseSlug(options.caseID); !ok {
+			return options, fmt.Errorf("unknown case %s", options.caseID)
+		}
 	}
 	if options.language != "" {
 		found := false
@@ -78,11 +98,19 @@ func parseDevOptions(args []string) (devOptions, error) {
 func (options devOptions) target(base string) string {
 	path := "/"
 	if options.caseID != "" || options.mode != "" {
-		path = "/en/cases/should-you-send-it-again/"
+		slug, ok := devCaseSlug(options.caseID)
+		if !ok {
+			slug = devCaseSlugs["fs-c01"]
+		}
+		path = "/en/cases/" + slug + "/"
 	}
 	if options.locale != "" {
 		if options.caseID != "" || options.mode != "" {
-			path = "/" + options.locale + "/cases/should-you-send-it-again/"
+			slug, ok := devCaseSlug(options.caseID)
+			if !ok {
+				slug = devCaseSlugs["fs-c01"]
+			}
+			path = "/" + options.locale + "/cases/" + slug + "/"
 		} else {
 			path = "/" + options.locale + "/"
 		}
