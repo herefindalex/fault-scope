@@ -124,6 +124,9 @@ func build() error {
 }
 
 func check() error {
+	if err := validateDocs("."); err != nil {
+		return err
+	}
 	if err := generateSnippets(); err != nil {
 		return err
 	}
@@ -198,11 +201,13 @@ func main() {
 			err = command(filepath.Join(".", "dist", name), args...)
 		}
 	case "check":
-		all, language, caseID, locale := false, "", "", ""
+		all, docsOnly, language, caseID, locale := false, false, "", "", ""
 		for i := 2; i < len(os.Args); i++ {
 			switch os.Args[i] {
 			case "--all":
 				all = true
+			case "--docs":
+				docsOnly = true
 			case "--language", "--case", "--locale":
 				if i+1 >= len(os.Args) {
 					err = fmt.Errorf("missing value for %s", os.Args[i])
@@ -223,24 +228,31 @@ func main() {
 		if err == nil && caseID != "" && caseID != "fs-c01" {
 			err = fmt.Errorf("unknown case %s", caseID)
 		}
+		if err == nil && docsOnly && (all || caseID != "" || language != "" || locale != "") {
+			err = fmt.Errorf("--docs cannot be combined with other check options")
+		}
 		if err == nil {
-			if locale != "" {
-				err = validateLocalization(locale)
-			}
-			if err == nil && language != "" {
-				err = generateSnippets()
-				if err == nil {
-					err = validateCase()
+			if docsOnly {
+				err = validateDocs(".")
+			} else {
+				if locale != "" {
+					err = validateLocalization(locale)
 				}
-				if err == nil {
-					err = checkLanguage(language)
-				}
-			} else if err == nil && locale == "" {
-				err = check()
-				if err == nil && all {
-					for _, item := range languages {
-						if err = checkLanguage(item); err != nil {
-							break
+				if err == nil && language != "" {
+					err = generateSnippets()
+					if err == nil {
+						err = validateCase()
+					}
+					if err == nil {
+						err = checkLanguage(language)
+					}
+				} else if err == nil && locale == "" {
+					err = check()
+					if err == nil && all {
+						for _, item := range languages {
+							if err = checkLanguage(item); err != nil {
+								break
+							}
 						}
 					}
 				}

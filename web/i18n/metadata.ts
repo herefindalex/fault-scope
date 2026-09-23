@@ -3,7 +3,7 @@ import { ui } from "./catalog";
 import {
   localPath,
   localeDefinition,
-  registry,
+  publicLocales,
   siteUrl,
   type Locale,
 } from "./locale";
@@ -16,7 +16,10 @@ export function localizedMetadata(
 ): Metadata {
   const route = localPath(locale, path);
   const languages = Object.fromEntries(
-    registry.map((item) => [item.id, `${siteUrl}${localPath(item.id, path)}`]),
+    publicLocales.map((item) => [
+      item.id,
+      `${siteUrl}${localPath(item.id, path)}`,
+    ]),
   );
   return {
     title,
@@ -32,12 +35,13 @@ export function localizedMetadata(
       type: "website",
       url: `${siteUrl}${route}`,
       locale,
-      alternateLocale: registry
+      alternateLocale: publicLocales
         .filter((item) => item.id !== locale)
         .map((item) => item.id),
     },
     robots:
-      localeDefinition(locale).status === "source"
+      localeDefinition(locale).status === "source" ||
+      localeDefinition(locale).status === "reviewed"
         ? { index: true, follow: true }
         : { index: false, follow: true },
   };

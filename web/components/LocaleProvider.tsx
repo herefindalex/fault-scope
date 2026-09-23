@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react";
 import {
   localePreferenceKey,
-  registry,
+  publicLocales,
   switchLocaleUrl,
   type Locale,
 } from "../i18n/locale";
@@ -52,7 +52,7 @@ export function GlobalLocaleSelector({
         value={locale}
         onChange={(event) => choose(event.target.value)}
       >
-        {registry.map((item) => (
+        {publicLocales.map((item) => (
           <option key={item.id} value={item.id} lang={item.id}>
             {item.nativeName}
           </option>

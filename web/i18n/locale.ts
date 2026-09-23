@@ -2,6 +2,7 @@ import registry from "./registry.json";
 import english from "./messages/en.json";
 
 export { registry };
+export const publicLocales = registry.filter((item) => item.status !== "draft");
 export type Locale = string;
 export type MessageKey = keyof typeof english;
 export const localePreferenceKey = "faultscope.v1.locale";
@@ -10,11 +11,11 @@ export const siteUrl = (
 ).replace(/\/$/, "");
 
 export function isLocale(value: string | null | undefined): value is Locale {
-  return !!value && registry.some((item) => item.id === value);
+  return !!value && publicLocales.some((item) => item.id === value);
 }
 
 export function localeDefinition(locale: Locale) {
-  return registry.find((item) => item.id === locale) ?? registry[0];
+  return publicLocales.find((item) => item.id === locale) ?? registry[0];
 }
 
 export function resolveLocale(
@@ -26,7 +27,7 @@ export function resolveLocale(
   if (isLocale(saved)) return saved;
   for (const item of browser) {
     const normalized = item.replaceAll("_", "-");
-    const exact = registry.find(
+    const exact = publicLocales.find(
       (entry) => entry.id.toLowerCase() === normalized.toLowerCase(),
     );
     if (exact) return exact.id;
@@ -39,7 +40,9 @@ export function resolveLocale(
       if (normalized.toLowerCase() === "zh") return "zh-CN";
       continue;
     }
-    const regional = registry.find((entry) => entry.id.toLowerCase() === base);
+    const regional = publicLocales.find(
+      (entry) => entry.id.toLowerCase() === base,
+    );
     if (regional) return regional.id;
     if (base === "pt") return "pt-BR";
   }
@@ -60,7 +63,7 @@ export function localPath(locale: Locale, path = ""): string {
 
 export function alternates(path: string) {
   return Object.fromEntries(
-    registry.map((item) => [item.id, localPath(item.id, path)]),
+    publicLocales.map((item) => [item.id, localPath(item.id, path)]),
   );
 }
 

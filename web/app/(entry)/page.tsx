@@ -1,5 +1,5 @@
 import { LocaleEntry } from "../../components/LocaleEntry";
-import { registry } from "../../i18n/locale";
+import { publicLocales } from "../../i18n/locale";
 
 export default function EntryPage() {
   return (
@@ -8,7 +8,7 @@ export default function EntryPage() {
       <p>Choose your human language. You can choose a code lens separately.</p>
       <LocaleEntry />
       <ul>
-        {registry.map((item) => (
+        {publicLocales.map((item) => (
           <li key={item.id}>
             <a href={`/${item.id}/`} lang={item.id}>
               {item.nativeName}

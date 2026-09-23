@@ -8,12 +8,12 @@ import {
   GlobalLanguageSelector,
   LanguageProvider,
 } from "../../components/LanguageProvider";
-import { isLocale, localeDefinition, registry } from "../../i18n/locale";
+import { isLocale, localeDefinition, publicLocales } from "../../i18n/locale";
 import { ui } from "../../i18n/catalog";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return registry.map((item) => ({ locale: item.id }));
+  return publicLocales.map((item) => ({ locale: item.id }));
 }
 
 export default async function LocalizedLayout({
