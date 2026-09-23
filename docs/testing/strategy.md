@@ -6,6 +6,7 @@ Each test layer answers a different question.
 | --- | --- | --- |
 | Go runtime | `go test ./...` | Routing, cache headers, manifest verification, shutdown-related behavior and tool parsing |
 | Frontend | `pnpm --dir web test`, typecheck, formatting | Case interactions, locale/Code Lens state, presentation code correctness |
+| Browser E2E | `pnpm --dir web e2e` after `go run ./tools build` | All 20 public locales render the home page, 12 Guided steps, Challenge, and Deep Dive from the embedded binary |
 | Case and locale validation | `go run ./tools check` | IDs, required sections, catalog shape, placeholders, and reviewed-locale completeness |
 | Code Lens fixtures | `go run ./tools check --all` or focused `--language` | Each source compiles or passes syntax checking and its weak/strong/scope fixtures |
 | Embedded binary | `go run ./tools build` then `go run ./tools smoke` | Exported deep routes, assets, HTTP behavior, bundle metadata, clean shutdown |

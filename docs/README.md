@@ -1,4 +1,4 @@
-# Faultscope documentation
+# FaultScope documentation
 
 Engineering documentation is written in English. The [Traditional Chinese
 overview](../README.zh-TW.md) is a separate, manually maintained entry point.

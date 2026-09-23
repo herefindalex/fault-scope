@@ -24,11 +24,13 @@ describe("human locale", () => {
       "/ja/cases/should-you-send-it-again/?lang=php&mode=challenge#evidence",
     );
   });
-  it("falls back at the message level for incomplete beta content", () => {
-    expect(caseCopy("ja", "step.strong-contract.explanation")).toBe(
+  it("serves localized beta content with placeholder interpolation", () => {
+    expect(caseCopy("ja", "step.strong-contract.explanation")).not.toBe(
       caseCopy("en", "step.strong-contract.explanation"),
     );
     expect(ui("ja", "home.answerNote", { answer: "Go" })).toContain("Go");
-    expect(caseCopy("ar", "step.evidence.lead")).toMatch(/^\u2066.*\u2069$/);
+    expect(caseCopy("ar", "step.evidence.lead")).not.toBe(
+      caseCopy("en", "step.evidence.lead"),
+    );
   });
 });

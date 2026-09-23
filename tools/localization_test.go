@@ -23,7 +23,7 @@ func TestLocalizationCatalog(t *testing.T) {
 	}
 }
 
-func TestLocalizationValidationRejectsDuplicateAndMissingReviewedContent(t *testing.T) {
+func TestLocalizationValidationRejectsDuplicateAndMissingPublicContent(t *testing.T) {
 	var result map[string]string
 	if err := noDuplicateKeys(json.NewDecoder(strings.NewReader(`{"x":"one","x":"two"}`))); err == nil {
 		t.Fatal("duplicate key accepted")
@@ -31,7 +31,7 @@ func TestLocalizationValidationRejectsDuplicateAndMissingReviewedContent(t *test
 	source := map[string]string{"title": "Retry {operationId}", "body": "Body"}
 	result = map[string]string{"title": "再試行 {operationId}"}
 	if err := validateMessages("test", source, result, true); err == nil {
-		t.Fatal("missing reviewed message accepted")
+		t.Fatal("missing public message accepted")
 	}
 	if err := validateMessages("test", source, result, false); err != nil {
 		t.Fatal(err)

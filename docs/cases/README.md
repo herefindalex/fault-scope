@@ -1,6 +1,6 @@
 # Case model
 
-A Faultscope Case is one authored lesson about a correctness decision under
+A FaultScope Case is one authored lesson about a correctness decision under
 failure. Today there is one published Case, [`fs-c01`](fs-c01.md).
 
 | Layer | Responsibility | Current location |

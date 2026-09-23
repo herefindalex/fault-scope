@@ -1,6 +1,6 @@
 # Architecture overview
 
-Faultscope has a build-time frontend and one production runtime. The web app
+FaultScope has a build-time frontend and one production runtime. The web app
 is Next.js App Router with React and static export. MDX is configured as a
 build-time option; current Case 01 prose uses JSON locale catalogs. Source
 examples in `examples/` are extracted by semantic anchor.
@@ -10,7 +10,7 @@ flowchart TD
   A["React / MDX + locale catalogs + Code Lens sources"] --> B["Next.js static export"]
   B --> C["Generated web bundle"]
   C --> D["Go embed + build manifest"]
-  D --> E["One Faultscope executable"]
+  D --> E["One FaultScope executable"]
   U["Browser"] --> F["Go HTTP server"]
   F --> E
 ```

@@ -1,6 +1,6 @@
 # Security
 
-Faultscope serves public, read-only learning content. The current runtime has
+FaultScope serves public, read-only learning content. The current runtime has
 no accounts, uploads, private user records, or mutation API. Browser storage
 holds local preferences and Case progress. This limited surface is not a
 guarantee against vulnerabilities.

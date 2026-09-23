@@ -26,8 +26,7 @@ go run ./tools check --locale ja
 
 Replace `ja` with the locale ID. This checks registry metadata, required
 shared keys, duplicate/unknown keys, placeholder parity, Case/step IDs, and
-completeness required by the locale's status. It needs Go only. A beta
-translation may omit messages; a reviewed one may not.
+completeness required by the locale's status. It needs Go only. All public locales, including beta locales, must provide every UI and Case message and every step ID.
 
 ## 3. Preview
 
@@ -37,10 +36,7 @@ With Node 24 and pnpm 12 installed:
 go run ./tools dev --open --locale ja --case fs-c01 --language cpp
 ```
 
-Inspect Guided, Challenge, Deep Dive, long strings, selector labels, and
-fallback markers. Development shows `[MISSING: key]` next to English for
-missing beta messages. Production falls back at the message level; it does
-not redirect the whole page to English. For Arabic, follow the [RTL
+Inspect Guided, Challenge, Deep Dive, long strings, and selector labels. The validator rejects missing public-locale messages. Runtime message-level English fallback remains a defensive safeguard. For Arabic, follow the [RTL
 checklist](rtl.md). Finish with `go run ./tools check`.
 
 ## Troubleshooting

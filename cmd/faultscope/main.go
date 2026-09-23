@@ -54,7 +54,7 @@ func run() error {
 	defer stop()
 	serveErr := make(chan error, 1)
 	go func() { serveErr <- httpServer.Serve(listener) }()
-	log.Printf("Faultscope listening on %s", listener.Addr())
+	log.Printf("FaultScope listening on %s", listener.Addr())
 	select {
 	case err := <-serveErr:
 		if errors.Is(err, http.ErrServerClosed) {

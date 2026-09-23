@@ -39,5 +39,9 @@ run with one command, use `go run ./tools preview --open`.
 
 `go run ./tools smoke` exercises the built executable's routes, assets,
 headers, metadata, and shutdown. `GET /healthz` returns `ok` while it runs.
+To exercise all 20 locales in a browser against the built binary, run
+`pnpm --dir web e2e`. Install Playwright Chromium first, or set
+`FAULTSCOPE_CHROME_PATH` to an installed Chrome executable. The E2E runner
+starts the binary on `127.0.0.1:8081` and shuts it down after the tests.
 See [commands](commands.md) for focused checks and
 [troubleshooting](../operations/troubleshooting.md) if a tool is missing.

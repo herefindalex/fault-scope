@@ -10,8 +10,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "format:check": "prettier --check app components content i18n src/case.ts src/case.test.ts src/language-choice.ts src/snippets.ts src/case-data.json mdx-components.tsx next.config.mjs vitest.config.ts package.json tsconfig.json",
+    "format:check": "prettier --check app components content e2e i18n src/case.ts src/case.test.ts src/language-choice.ts src/snippets.ts src/case-data.json mdx-components.tsx next.config.mjs playwright.config.ts vitest.config.ts package.json tsconfig.json",
     "test": "vitest run"
   },
   "dependencies": {
@@ -23,12 +24,13 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@testing-library/react": "16.3.0",
-    "@testing-library/user-event": "14.6.1",
     "jsdom": "26.1.0",
     "prettier": "3.6.2",
     "typescript": "^5.9.0",

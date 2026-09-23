@@ -1,8 +1,8 @@
-# Faultscope
+# FaultScope
 
 **Interactive learning lab for distributed application correctness.**
 
-Faultscope helps engineers reason from evidence, contracts, properties, authority,
+FaultScope helps engineers reason from evidence, contracts, properties, authority,
 durability, and failure boundaries. The lesson is the reasoning, not a list of
 reliability pattern names.
 
@@ -35,9 +35,8 @@ not production SDK clients.
 
 Human Locale changes explanations and layout. Code Lens changes the source
 representation. They are independent: for example, 繁體中文 + Go or العربية + C.
-There are 20 Human Locales with locale-prefixed routes; English is complete,
-while the other 19 are
-**unreviewed beta translations with English message fallback**. The seven Code
+All 20 Human Locales have complete UI and Case 01 catalogs. The 19 non-English
+locales remain **unreviewed beta translations**. The seven Code
 Lenses are **Go, TypeScript, Python, Java, PHP, C, and C++**.
 
 The frontend is built with Next.js/React as a static export. The build supports
@@ -58,4 +57,4 @@ Start at the [documentation index](docs/README.md) or choose a path:
 - [Contributing guide](CONTRIBUTING.md)
 - [繁體中文概覽](README.zh-TW.md)
 
-Faultscope is licensed under the [MIT License](LICENSE).
+FaultScope is licensed under the [MIT License](LICENSE).

@@ -1,4 +1,4 @@
-# How to run Faultscope
+# How to run FaultScope
 
 A bundled release is one executable with public, read-only content. It needs
 no runtime Node, pnpm, database, content directory, or translation service.
@@ -28,7 +28,7 @@ client.
 ## Reverse proxy
 
 An optional nginx, Caddy, or Traefik proxy can terminate TLS and forward
-requests to Faultscope. Preserve paths and trailing slashes so static deep
+requests to FaultScope. Preserve paths and trailing slashes so static deep
 links still resolve. The Go server itself does not provide TLS. Set
 `FAULTSCOPE_SITE_URL` to the public origin **when building** to emit correct
 canonical, alternate, and sitemap URLs; setting it only on the running

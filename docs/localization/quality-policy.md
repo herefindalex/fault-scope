@@ -7,7 +7,7 @@ metadata therefore describes review state, not Case semantics.
 | Status | Meaning | Route and validation behavior |
 | --- | --- | --- |
 | `source` | Complete English authoring baseline | Complete messages required; indexable |
-| `beta` | Usable partial translation, not fully reviewed | Missing messages fall back to English; noindex |
+| `beta` | Complete catalog awaiting technical and native-speaker review | Complete UI/Case keys and step IDs required; noindex |
 | `reviewed` | Complete translation reviewed for technical meaning | Complete UI/Case keys and step IDs required; indexable |
 | `draft` | Not ready for a public localized route | Excluded from generated public routes |
 

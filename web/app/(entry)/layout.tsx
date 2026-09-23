@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../style.css";
 
 export const metadata: Metadata = {
-  title: "Faultscope — Choose your language",
+  title: "FaultScope — Choose your language",
   description:
     "Interactive learning lab for distributed application correctness.",
   robots: { index: false, follow: true },

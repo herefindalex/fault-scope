@@ -16,6 +16,7 @@ orchestrates the build and checks; it does not replace the language toolchains.
 | `check --case fs-c01 --language cpp` | Generates snippets, validates Case metadata, and checks one Code Lens | Go and selected language toolchain |
 | `build` | Creates `dist/faultscope` with static content embedded | Go, Git, Node 24, pnpm 12, installed web dependencies |
 | `smoke` | Probes an existing `dist/faultscope` binary and its embedded manifest | Built binary |
+| `pnpm --dir web e2e` | Runs browser E2E against the embedded binary on `127.0.0.1:8081` | Built binary, Node 24, pnpm 12, Chrome or Playwright Chromium |
 
 `dev` and `preview` accept `--open`, `--locale <id>`, `--case fs-c01`,
 `--language <lens>`, and `--mode guided|challenge|deep-dive`. These options

@@ -15,9 +15,7 @@ locale paths return an HTTP `404` from the embedded server.
 Each localized page is statically exported with its own `<html lang>` and
 direction. Page metadata includes title, description, Open Graph fields,
 canonical URL, `hreflang` alternatives, and an `x-default` link to `/`.
-English source pages are indexable and appear in the sitemap. The 19
-incomplete, unreviewed beta locales have `noindex` and are omitted from the
-sitemap until reviewed. No translated slug is generated.
+English source pages are indexable and appear in the sitemap. The The 19 complete but unreviewed beta locales are `noindex` and omitted from the sitemap until reviewed. No translated slug is generated.
 
 Set `FAULTSCOPE_SITE_URL` to the public site origin **at build time** for
 production absolute metadata and sitemap URLs. Without it, local builds use

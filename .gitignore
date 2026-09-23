@@ -10,5 +10,7 @@ web/src/generated/
 internal/webui/dist/
 dist/
 /faultscope
+web/playwright-report/
+web/test-results/
 **/__pycache__/
 *.pyc

@@ -15,8 +15,7 @@ The current validator checks:
   with matching, nonnested `faultscope:begin` and `faultscope:end` markers.
 - Locale registry IDs, names, direction, status, and Arabic RTL direction;
   known shared keys, nonempty values, duplicate JSON keys, placeholder parity,
-  Case identity, and valid step IDs. `source` and `reviewed` require complete
-  UI/Case message sets and Case step coverage. Beta may use English fallback.
+  Case identity, and valid step IDs. Every public locale (`source`, `beta`, or `reviewed`) requires complete UI/Case message sets and Case step coverage.
 
 It does **not** judge the translation's technical meaning, prove that a
 counterexample is minimal, verify a real cloud provider's contract, or prove

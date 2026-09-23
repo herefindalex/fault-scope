@@ -1,6 +1,6 @@
 # Why one Go binary
 
-**Build-time complexity does not become runtime complexity.** Faultscope uses
+**Build-time complexity does not become runtime complexity.** FaultScope uses
 Node 24, pnpm, Next.js, and several language toolchains to prepare and test
 content, but the production artifact is one Go executable with an embedded
 static site.

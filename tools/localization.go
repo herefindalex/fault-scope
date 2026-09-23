@@ -174,7 +174,7 @@ func validateLocalization(targetLocale string) error {
 			continue
 		}
 		foundTarget = true
-		complete := locale.Status == "source" || locale.Status == "reviewed"
+		complete := locale.Status != "draft"
 		uiPath := filepath.Join("web", "i18n", "messages", locale.ID+".json")
 		var messages map[string]string
 		if err := readLocalizedJSON(uiPath, &messages); err != nil {
@@ -210,7 +210,7 @@ func validateLocalization(targetLocale string) error {
 			}
 		}
 		if complete && len(translatedSteps) != len(stepIDs) {
-			return fmt.Errorf("%s: reviewed locale has incomplete step IDs", casePath)
+			return fmt.Errorf("%s: public locale has incomplete step IDs", casePath)
 		}
 		if err := validateMessages(casePath, sourceCase.Messages, content.Messages, complete); err != nil {
 			return err

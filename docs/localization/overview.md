@@ -15,9 +15,7 @@ Browser language is never used to infer Code Lens. Code Lens has its own
 Locale switching preserves the query string and canonical Case progress.
 
 The [registry](../../web/i18n/registry.json) currently lists 20 locales.
-English is the complete source locale. The other 19 are **unreviewed beta
-translations**, with message-level English fallback; they are not yet fully
-localized. Arabic uses RTL document layout, while source code stays LTR.
+English is the source locale. All 20 locales have complete UI and Case 01 catalogs. The 19 non-English locales are **unreviewed beta translations**. Arabic uses RTL document layout, while source code stays LTR.
 
 See the [translation guide](translation-guide.md),
 [quality policy](quality-policy.md), [terminology style guide](style-guide.md),

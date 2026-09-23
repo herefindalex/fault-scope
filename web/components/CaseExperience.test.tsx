@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { caseCopy } from "../i18n/catalog";
 import { CaseExperience, caseProgressKey } from "./CaseExperience";
 import {
   LanguageProvider,
@@ -79,7 +80,7 @@ describe("Case 01 with independent locale and code lens", () => {
     await user.click(screen.getByRole("button", { name: "下一步" }));
     await user.click(screen.getByRole("button", { name: "下一步" }));
     expect(
-      screen.getByRole("group", { name: /Two representative executions/ }),
+      screen.getByRole("group", { name: caseCopy("zh-TW", "worlds.aria") }),
     ).toBeTruthy();
     await user.selectOptions(
       screen.getByRole("combobox", { name: "選擇人類語言" }),
@@ -97,7 +98,7 @@ describe("Case 01 with independent locale and code lens", () => {
     history.replaceState(null, "", destination);
     renderCase("ja");
     expect(
-      screen.getByRole("group", { name: /Two representative executions/ }),
+      screen.getByRole("group", { name: caseCopy("ja", "worlds.aria") }),
     ).toBeTruthy();
     expect(
       screen.getByRole("heading", { name: "二つの可能な実行" }),
