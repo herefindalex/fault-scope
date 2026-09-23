@@ -67,6 +67,9 @@ func build() error {
 	if err := validateLocalization(""); err != nil {
 		return err
 	}
+	if err := generateExtraCaseCatalogs(); err != nil {
+		return err
+	}
 	published, err := publishedCaseIDs()
 	if err != nil {
 		return err
@@ -136,6 +139,9 @@ func check() error {
 	if err := validateLocalization(""); err != nil {
 		return err
 	}
+	if err := generateExtraCaseCatalogs(); err != nil {
+		return err
+	}
 	if err := os.RemoveAll("web/.next/types"); err != nil {
 		return err
 	}
@@ -160,11 +166,17 @@ func main() {
 	switch os.Args[1] {
 	case "generate":
 		err = generateSnippets()
+		if err == nil {
+			err = generateExtraCaseCatalogs()
+		}
 	case "dev":
 		options, parseErr := parseDevOptions(os.Args[2:])
 		err = parseErr
 		if err == nil {
 			err = generateSnippets()
+		}
+		if err == nil {
+			err = generateExtraCaseCatalogs()
 		}
 		if err == nil {
 			watchSnippets()
@@ -225,8 +237,10 @@ func main() {
 				err = fmt.Errorf("unknown check option %s", os.Args[i])
 			}
 		}
-		if err == nil && caseID != "" && caseID != "fs-c01" {
-			err = fmt.Errorf("unknown case %s", caseID)
+		if err == nil && caseID != "" {
+			if _, ok := devCaseSlug(caseID); !ok {
+				err = fmt.Errorf("unknown case %s", caseID)
+			}
 		}
 		if err == nil && docsOnly && (all || caseID != "" || language != "" || locale != "") {
 			err = fmt.Errorf("--docs cannot be combined with other check options")

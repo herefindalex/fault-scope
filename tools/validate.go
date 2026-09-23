@@ -21,6 +21,40 @@ type caseMetadata struct {
 	Sections             []string            `json:"sections"`
 }
 
+var caseMetadataPaths = []string{
+	"web/src/case-data.json",
+	"web/src/case-02-data.json",
+	"web/src/case-03-data.json",
+}
+
+var canonicalSlugs = map[string]string{
+	"fs-c01": "should-you-send-it-again",
+	"fs-c02": "can-the-old-worker-still-commit",
+	"fs-c03": "database-committed-where-is-event",
+}
+
+var requiredCaseAnchors = map[string][]string{
+	"fs-c01": {
+		"fs-c01.retry-independent-attempt",
+		"fs-c01.keep-unresolved",
+		"fs-c01.retry-same-logical-operation",
+		"fs-c01.retry-with-new-logical-operation",
+	},
+	"fs-c02": {
+		"fs-c02.commit-without-generation",
+		"fs-c02.commit-with-generation",
+		"fs-c02.local-authority-check",
+		"fs-c02.current-generation-commit",
+	},
+	"fs-c03": {
+		"fs-c03.split-dual-write",
+		"fs-c03.business-state-commit",
+		"fs-c03.durable-publication-intent",
+		"fs-c03.relay-publish",
+		"fs-c03.mark-publication-complete",
+	},
+}
+
 func set(items []string) (map[string]bool, error) {
 	result := make(map[string]bool)
 	for _, item := range items {
@@ -32,27 +66,56 @@ func set(items []string) (map[string]bool, error) {
 	return result, nil
 }
 
+func loadCases() ([]caseMetadata, error) {
+	cases := make([]caseMetadata, 0, len(caseMetadataPaths))
+	for _, path := range caseMetadataPaths {
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return nil, err
+		}
+		var c caseMetadata
+		if err := json.Unmarshal(data, &c); err != nil {
+			return nil, fmt.Errorf("%s: %w", path, err)
+		}
+		cases = append(cases, c)
+	}
+	return cases, nil
+}
+
 func validateCase() error {
-	data, err := os.ReadFile("web/src/case-data.json")
+	cases, err := loadCases()
 	if err != nil {
 		return err
 	}
-	return validateCaseData(data)
+	ids, slugs := map[string]bool{}, map[string]bool{}
+	for index, c := range cases {
+		data, err := os.ReadFile(caseMetadataPaths[index])
+		if err != nil {
+			return err
+		}
+		if err := validateCaseData(data); err != nil {
+			return fmt.Errorf("%s: %w", caseMetadataPaths[index], err)
+		}
+		if ids[c.ID] || slugs[c.Slug] {
+			return fmt.Errorf("duplicate Case ID or slug: %s %s", c.ID, c.Slug)
+		}
+		ids[c.ID], slugs[c.Slug] = true, true
+	}
+	return nil
 }
 
 func publishedCaseIDs() ([]string, error) {
-	data, err := os.ReadFile("web/src/case-data.json")
+	cases, err := loadCases()
 	if err != nil {
 		return nil, err
 	}
-	var c caseMetadata
-	if err := json.Unmarshal(data, &c); err != nil {
-		return nil, err
+	var ids []string
+	for _, c := range cases {
+		if c.Status == "published" {
+			ids = append(ids, c.ID)
+		}
 	}
-	if c.Status == "published" {
-		return []string{c.ID}, nil
-	}
-	return []string{}, nil
+	return ids, nil
 }
 
 func validateCaseData(data []byte) error {
@@ -60,12 +123,12 @@ func validateCaseData(data []byte) error {
 	if err := json.Unmarshal(data, &c); err != nil {
 		return err
 	}
-	if c.ID != "fs-c01" || c.Slug != "should-you-send-it-again" || (c.Status != "draft" && c.Status != "published") {
-		return fmt.Errorf("invalid Case 01 identity or lifecycle")
+	if canonicalSlugs[c.ID] != c.Slug || (c.Status != "draft" && c.Status != "published") {
+		return fmt.Errorf("invalid Case identity or lifecycle: %s %s", c.ID, c.Slug)
 	}
 	steps, err := set(c.Steps)
-	if err != nil {
-		return err
+	if err != nil || len(steps) == 0 {
+		return fmt.Errorf("invalid Case steps: %v", err)
 	}
 	visuals, err := set(c.VisualStates)
 	if err != nil {
@@ -84,16 +147,21 @@ func validateCaseData(data []byte) error {
 		return err
 	}
 	if !steps[c.GuidedEntry] || !steps[c.ChallengeEntry] {
-		return fmt.Errorf("missing guided or challenge entry")
+		return fmt.Errorf("missing guided or challenge entry for %s", c.ID)
+	}
+	if len(c.Questions["challenge"]) < 2 {
+		return fmt.Errorf("missing challenge options for %s", c.ID)
 	}
 	for question, options := range c.Questions {
-		if _, err := set(options); err != nil || question == "" {
+		if _, err := set(options); err != nil || question == "" || len(options) < 2 {
 			return fmt.Errorf("invalid options for question %q", question)
 		}
 	}
-	for _, question := range []string{"review", "evidence", "scope", "transfer", "challenge"} {
-		if len(c.Questions[question]) < 2 {
-			return fmt.Errorf("missing question %s", question)
+	if c.ID == "fs-c01" {
+		for _, question := range []string{"review", "evidence", "scope", "transfer"} {
+			if len(c.Questions[question]) < 2 {
+				return fmt.Errorf("missing question %s", question)
+			}
 		}
 	}
 	for _, visual := range c.RequiredVisualStates {
@@ -102,7 +170,7 @@ func validateCaseData(data []byte) error {
 		}
 	}
 	if c.Status == "published" {
-		for _, anchor := range anchors {
+		for _, anchor := range requiredCaseAnchors[c.ID] {
 			if !caseAnchors[anchor] {
 				return fmt.Errorf("missing published anchor %s", anchor)
 			}

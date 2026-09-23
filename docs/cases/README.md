@@ -1,25 +1,13 @@
 # Case model
 
-A FaultScope Case is one authored lesson about a correctness decision under
-failure. Today there is one published Case, [`fs-c01`](fs-c01.md).
+A FaultScope Case is an authored lesson about one correctness decision under failure. Three Cases are published:
 
-| Layer | Responsibility | Current location |
+| Case | Primary question | Reasoning dimension |
 | --- | --- | --- |
-| Semantic | Stable Case, step, question, option, visual-state, and anchor IDs; the property and contract being taught | `web/src/case-data.json` and `web/src/case.ts` |
-| Teaching | Guided, Challenge, and Deep Dive presentation around those IDs | `web/components/CaseExperience.tsx` and locale Case catalogs |
-| Language | Human-language prose and seven programming-language source artifacts | `web/content/cases/fs-c01/locales/` and `examples/` |
-| Evidence | What observation supports each claim and which assumptions remain | Authored in Case 01 prose and fixtures; no separate evidence service exists |
+| [FS-C01](fs-c01.md) | Should you send it again? | Ambiguous outcome and identity |
+| [FS-C02](fs-c02.md) | Can the old worker still commit? | Authority |
+| [FS-C03](fs-c03.md) | The database committed. Where is the event? | Durability and atomicity |
 
-The Case owns meaning. The Case reducer owns interaction state. Code Lens owns
-the programming-language representation. Human Locale owns presentation
-language. The evidence layer records justification and provenance of a claim
-inside the lesson; it must not silently turn an observation into a remote
-outcome.
+The [Case registry](../../web/src/cases.ts) holds stable identity and structural metadata. [CaseShell](../../web/components/CaseShell.tsx) and [useCaseProgress](../../web/components/useCaseProgress.ts) handle shared interaction and per-Case persistence. Each Case owns its failure model, reasoning, rail values, and visual. Code Lenses present the same semantics in seven programming languages; Human Locales change only the explanation and interface language. Neither changes the canonical Case state.
 
-Locale changes preserve Case identity, step, answer IDs, and visual state.
-Code Lens changes preserve the same semantics. Neither produces a translated
-copy of the state machine.
-
-Start with the [authoring guide](authoring-guide.md), then read
-[semantic anchors](../code-lenses/semantic-anchors.md) and
-[content validation](../testing/content-validation.md).
+Start with the [authoring guide](authoring-guide.md), then read [semantic anchors](../code-lenses/semantic-anchors.md) and [content validation](../testing/content-validation.md).

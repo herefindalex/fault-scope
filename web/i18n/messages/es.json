@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Caso 01",
+  "nav.cases": "Casos",
   "nav.lenses": "Lenguajes de código",
   "nav.about": "Acerca de",
   "nav.home": "FaultScope casa",
-  "footer.preview": "FaultScope · Vista previa del caso 01",
+  "footer.preview": "FaultScope · Vista previa",
   "footer.method": "Razona a partir de la evidencia, el contrato y la propiedad.",
   "locale.label": "Idioma",
   "locale.choose": "Elegir idioma",

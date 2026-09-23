@@ -1,0 +1,37 @@
+{
+  "id": "fs-c02",
+  "slug": "can-the-old-worker-still-commit",
+  "status": "published",
+  "guided_entry": "review",
+  "challenge_entry": "decision",
+  "steps": [
+    "review",
+    "acquire-a",
+    "pause-a",
+    "takeover-b",
+    "b-uncommitted",
+    "decision",
+    "weak-contract",
+    "counterexample",
+    "property",
+    "strong-contract",
+    "reject-a",
+    "accept-b",
+    "scope-challenge",
+    "remaining",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.yes", "option.no", "option.needMore"]
+  },
+  "visual_states": ["a-acquired", "a-paused", "b-current", "a-accepted-weak", "a-rejected", "b-accepted"],
+  "required_visual_states": ["b-current", "a-accepted-weak", "a-rejected", "b-accepted"],
+  "semantic_anchors": [
+    "fs-c02.commit-without-generation",
+    "fs-c02.commit-with-generation",
+    "fs-c02.local-authority-check",
+    "fs-c02.current-generation-commit"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": ["property", "counterexample", "positive-control", "scope-challenge", "remaining", "transfer"]
+}

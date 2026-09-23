@@ -1,11 +1,7 @@
 import raw from "./generated/snippets.json";
 import type { Language } from "./case";
 
-export type Anchor =
-  | "fs-c01.retry-independent-attempt"
-  | "fs-c01.keep-unresolved"
-  | "fs-c01.retry-same-logical-operation"
-  | "fs-c01.retry-with-new-logical-operation";
+export type Anchor = keyof typeof raw;
 
 const snippets = raw as Record<Anchor, Record<Language, string>>;
 

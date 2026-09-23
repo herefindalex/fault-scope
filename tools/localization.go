@@ -125,11 +125,7 @@ func validateLocalization(targetLocale string) error {
 	if len(registry) == 0 {
 		return fmt.Errorf("locale registry empty")
 	}
-	var canonicalCase caseMetadata
-	if err := readLocalizedJSON("web/src/case-data.json", &canonicalCase); err != nil {
-		return err
-	}
-	stepIDs, err := set(canonicalCase.Steps)
+	cases, err := loadCases()
 	if err != nil {
 		return err
 	}
@@ -137,22 +133,50 @@ func validateLocalization(targetLocale string) error {
 	if err := readLocalizedJSON("web/i18n/messages/en.json", &sourceUI); err != nil {
 		return err
 	}
-	var sourceCase caseTranslation
-	if err := readLocalizedJSON("web/content/cases/fs-c01/locales/en.json", &sourceCase); err != nil {
-		return err
-	}
-	if sourceCase.CaseID != canonicalCase.ID {
-		return fmt.Errorf("English Case translation has wrong Case ID")
-	}
-	for question, options := range canonicalCase.Questions {
-		if question == "" {
-			return fmt.Errorf("empty canonical question ID")
+	sourceCases := map[string]caseTranslation{}
+	stepSets := map[string]map[string]bool{}
+	for _, canonical := range cases {
+		stepIDs, err := set(canonical.Steps)
+		if err != nil {
+			return err
 		}
-		for _, option := range options {
-			if sourceCase.Messages[option] == "" {
-				return fmt.Errorf("English Case translation missing option %s", option)
+		stepSets[canonical.ID] = stepIDs
+		path := filepath.Join("web", "content", "cases", canonical.ID, "locales", "en.json")
+		var source caseTranslation
+		if err := readLocalizedJSON(path, &source); err != nil {
+			return err
+		}
+		if source.CaseID != canonical.ID {
+			return fmt.Errorf("%s: wrong Case ID", path)
+		}
+		if len(source.StepIDs) != len(canonical.Steps) {
+			return fmt.Errorf("%s: incomplete English step IDs", path)
+		}
+		for index, step := range canonical.Steps {
+			if source.StepIDs[index] != step {
+				return fmt.Errorf("%s: step order differs from metadata", path)
+			}
+			for _, suffix := range []string{"title", "lead"} {
+				key := "step." + step + "." + suffix
+				if source.Messages[key] == "" {
+					return fmt.Errorf("%s: missing %s", path, key)
+				}
 			}
 		}
+		for question, options := range canonical.Questions {
+			if question == "" {
+				return fmt.Errorf("empty canonical question ID")
+			}
+			for _, option := range options {
+				if source.Messages[option] == "" {
+					return fmt.Errorf("%s: missing option %s", path, option)
+				}
+			}
+		}
+		if err := validateMessages(path, source.Messages, source.Messages, true); err != nil {
+			return err
+		}
+		sourceCases[canonical.ID] = source
 	}
 	seen := map[string]bool{}
 	foundTarget := targetLocale == ""
@@ -192,28 +216,30 @@ func validateLocalization(targetLocale string) error {
 		if err := validateMessages(uiPath, sourceUI, messages, complete); err != nil {
 			return err
 		}
-		casePath := filepath.Join("web", "content", "cases", "fs-c01", "locales", locale.ID+".json")
-		var content caseTranslation
-		if err := readLocalizedJSON(casePath, &content); err != nil {
-			return err
-		}
-		if content.CaseID != canonicalCase.ID {
-			return fmt.Errorf("%s: invalid Case ID", casePath)
-		}
-		translatedSteps, err := set(content.StepIDs)
-		if err != nil {
-			return fmt.Errorf("%s: %w", casePath, err)
-		}
-		for step := range translatedSteps {
-			if !stepIDs[step] {
-				return fmt.Errorf("%s: unknown step ID %q", casePath, step)
+		for _, canonical := range cases {
+			casePath := filepath.Join("web", "content", "cases", canonical.ID, "locales", locale.ID+".json")
+			var content caseTranslation
+			if err := readLocalizedJSON(casePath, &content); err != nil {
+				return err
 			}
-		}
-		if complete && len(translatedSteps) != len(stepIDs) {
-			return fmt.Errorf("%s: public locale has incomplete step IDs", casePath)
-		}
-		if err := validateMessages(casePath, sourceCase.Messages, content.Messages, complete); err != nil {
-			return err
+			if content.CaseID != canonical.ID {
+				return fmt.Errorf("%s: invalid Case ID", casePath)
+			}
+			translatedSteps, err := set(content.StepIDs)
+			if err != nil {
+				return fmt.Errorf("%s: %w", casePath, err)
+			}
+			for step := range translatedSteps {
+				if !stepSets[canonical.ID][step] {
+					return fmt.Errorf("%s: unknown step ID %q", casePath, step)
+				}
+			}
+			if complete && len(translatedSteps) != len(canonical.Steps) {
+				return fmt.Errorf("%s: public locale has incomplete step IDs", casePath)
+			}
+			if err := validateMessages(casePath, sourceCases[canonical.ID].Messages, content.Messages, complete); err != nil {
+				return err
+			}
 		}
 	}
 	if !seen["en"] {

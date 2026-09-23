@@ -1,9 +1,9 @@
 {
-  "nav.cases": "Cas 01",
+  "nav.cases": "Cas",
   "nav.lenses": "Langages de code",
   "nav.about": "À propos",
   "nav.home": "Accueil FaultScope",
-  "footer.preview": "FaultScope · Aperçu du cas 01",
+  "footer.preview": "FaultScope · Aperçu",
   "footer.method": "Raison à partir de preuves, de contrats et de biens.",
   "locale.label": "Langue",
   "locale.choose": "Choisir la langue",

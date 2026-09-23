@@ -1,9 +1,9 @@
 {
-  "nav.cases": "الحالة 01",
+  "nav.cases": "الحالات",
   "nav.lenses": "لغات الشيفرة",
   "nav.about": "حول",
   "nav.home": "FaultScope المنزل",
-  "footer.preview": "FaultScope · معاينة الحالة 01",
+  "footer.preview": "FaultScope · معاينة",
   "footer.method": "استدل من الدليل والعقد والخاصية.",
   "locale.label": "لغة الواجهة",
   "locale.choose": "اختر لغة الواجهة",

@@ -1,9 +1,9 @@
 {
-  "nav.cases": "案例 01",
+  "nav.cases": "案例",
   "nav.lenses": "程式碼視角",
   "nav.about": "關於",
   "nav.home": "FaultScope 首頁",
-  "footer.preview": "FaultScope · 案例 01 預覽",
+  "footer.preview": "FaultScope · 預覽",
   "footer.method": "從證據、契約和性質推理。",
   "locale.label": "人類語言",
   "locale.choose": "選擇人類語言",

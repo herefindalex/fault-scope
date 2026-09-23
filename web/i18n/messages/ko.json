@@ -1,9 +1,9 @@
 {
-  "nav.cases": "사례 01",
+  "nav.cases": "사례",
   "nav.lenses": "코드 렌즈",
   "nav.about": "소개",
   "nav.home": "FaultScope 홈",
-  "footer.preview": "FaultScope · 사례 01 미리보기",
+  "footer.preview": "FaultScope · 미리보기",
   "footer.method": "증거, 계약 및 재산에 따른 이유.",
   "locale.label": "표시 언어",
   "locale.choose": "표시 언어 선택",

@@ -87,10 +87,17 @@ func smoke() error {
 	var home []byte
 	for _, route := range []string{
 		"/", "/en/", "/zh-TW/", "/ja/", "/ar/", "/ja/about/",
-		"/cases/should-you-send-it-again/", "/languages/php/",
+		"/cases/should-you-send-it-again/",
+		"/cases/can-the-old-worker-still-commit/",
+		"/cases/database-committed-where-is-event/", "/languages/php/",
 		"/en/cases/should-you-send-it-again/",
 		"/zh-TW/cases/should-you-send-it-again/",
 		"/ja/cases/should-you-send-it-again/",
+		"/en/cases/",
+		"/en/cases/can-the-old-worker-still-commit/",
+		"/zh-TW/cases/can-the-old-worker-still-commit/",
+		"/en/cases/database-committed-where-is-event/",
+		"/ar/cases/database-committed-where-is-event/",
 		"/en/languages/go/", "/ja/languages/cpp/", "/ar/languages/c/",
 	} {
 		body, err := get("GET", route, 200, "no-cache")
@@ -113,6 +120,8 @@ func smoke() error {
 		cache         string
 	}{
 		{"HEAD", "/", 200, "no-cache"}, {"HEAD", "/en/cases/should-you-send-it-again/", 200, "no-cache"},
+		{"HEAD", "/en/cases/can-the-old-worker-still-commit/", 200, "no-cache"},
+		{"HEAD", "/en/cases/database-committed-where-is-event/", 200, "no-cache"},
 		{"HEAD", "/api/version", 200, "no-store"}, {"GET", "/healthz", 200, "no-store"},
 		{"GET", "/not-real/", 404, ""}, {"GET", "/xx-INVALID/cases/should-you-send-it-again/", 404, ""},
 		{"POST", "/", 405, ""},
@@ -169,7 +178,7 @@ func smoke() error {
 	if err := json.Unmarshal(data, &manifest); err != nil {
 		return err
 	}
-	if info.ContentHash != manifest.ContentHash || info.Commit != manifest.Commit || info.Cases != 1 || info.CodeLenses != 7 {
+	if info.ContentHash != manifest.ContentHash || info.Commit != manifest.Commit || info.Cases != 3 || info.CodeLenses != 7 {
 		return fmt.Errorf("version API and bundle manifest differ")
 	}
 	if err := cmd.Process.Signal(os.Interrupt); err != nil {

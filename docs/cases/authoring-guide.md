@@ -1,51 +1,25 @@
 # How to author a Case
 
-This guide describes the required lesson shape and the **current extension
-work**. The repository validates one hard-coded Case, `fs-c01`; adding a second
-Case is not yet a drop-in content-only task.
+A FaultScope Case teaches one correctness decision under a concrete failure model. Use [Case 01](fs-c01.md), [Case 02](fs-c02.md), and [Case 03](fs-c03.md) as references. The shared infrastructure supports multiple Cases; a new Case still needs its own reasoning content, visual, Code Lens source regions, translations, and behavioral evidence.
 
 ## 1. Define the semantic contract
 
-Choose a stable Case ID, untranslated route slug, step/question/option IDs,
-visual states, and Case-namespaced semantic anchors. State the observer,
-failure model, contract, property, and enforcement boundary. Write a minimal
-allowed execution that violates the property before proposing a repair.
+Choose a stable Case ID and untranslated slug. Define step, question, option, visual-state, and Case-namespaced anchor IDs. State the observer, established evidence, allowed failure, weak contract, property, enforcement boundary, and minimal execution that violates the property. Preserve distinctions such as "the caller did not receive a response" versus "the receiver did not act," or "the broker accepted an event" versus "the consumer processed it."
 
-Do not write “timeout = failure” or “use idempotency” as the lesson. A missing
-response is an observation; the receiver's contract determines what a repeat
-may do. Name which actor has authority to decide an outcome and what state
-must survive crashes or late retries.
+Provide a positive control showing valid progress, a scope challenge showing where the guarantee ends, a remaining failure surface, a transfer exercise, and a [Six Questions](../product/six-questions.md) recap. Make synthetic assumptions explicit.
 
-## 2. Build the teaching path
+## 2. Add Case-specific content
 
-Include a title, initial code situation, established evidence, contract,
-property, minimal counterexample, intervention, positive control, scope
-challenge, remaining failure surface, transfer exercise, Deep Dive, and
-[Six Questions](../product/six-questions.md) recap. Label synthetic assumptions
-so readers do not mistake them for a universal network or provider guarantee.
-The positive control must show useful progress without violating the property.
-The scope challenge must test where protection ends.
+Add canonical metadata in `web/src/case-<number>-data.json` and register it in `web/src/cases.ts`. Metadata remains locale-neutral. Add the English catalog and all supported public Human Locale catalogs in `web/content/cases/<case-id>/locales/`. Register the new Case in `tools/catalogs.go`; the generator writes the frontend's combined catalog map, avoiding a hand-maintained import per locale. Translations change wording, never Case identity or reasoning state. Mark unreviewed translations beta under the [quality policy](../localization/quality-policy.md).
 
-## 3. Extend the current implementation
+Implement the Case-specific Guided reasoning, Challenge question, Deep Dive, rail values, and visual in a Case content module. Reuse `CaseShell` and `useCaseProgress` for mode tabs, navigation, Evidence / Contract / Property layout, and per-Case persistence. The shared shell must not infer retry, authority, or durability semantics. Cases 02 and 03 currently share a component for their presentation, but their Authority Timeline and Durability Domains remain separate visuals. Adding a fourth Case is **not** a content-only operation.
 
-Use [Case 01](fs-c01.md) as the concrete example. Currently the Case metadata
-validator, static route generator, source registry, and `CaseExperience`
-component know about `fs-c01`. A new Case requires extending those paths and
-their tests, then adding seven source representations or explicitly changing
-the published coverage rule. Keep semantic IDs in canonical metadata and
-locale-neutral state, not in translated prose. Put human wording in locale
-catalogs; mark new translations beta until reviewed.
+## 3. Add Code Lens representations
 
-Use `faultscope:begin <case-id>.<decision>` and matching
-`faultscope:end ...` markers around each Code Lens region. See the
-[Code Lens guide](../code-lenses/contributing.md) for the exact current source
-layout and checks.
+Provide semantic source regions for all seven Code Lenses under `examples/`, with Case-scoped `faultscope:begin` and `faultscope:end` markers. Register each Case's source file in `tools/snippets.go`; generated snippet keys are typed from `web/src/generated/snippets.json`. Add behavioral fixtures and wire them into `tools/languages.go`. The seven languages must express the same distributed contract, not merely translate syntax. See the [Code Lens guide](../code-lenses/contributing.md).
 
-## 4. Validate before publishing
+## 4. Route and validate
 
-Run `go run ./tools check` and `go run ./tools check --all` when changing
-cross-language behavior. Build and smoke-test the [single binary](../build/build.md).
-Review the [content validator's limits](../testing/content-validation.md):
-syntax, ID coverage, and fixtures do not prove a distributed correctness
-claim. Have an experienced engineer review the counterexample, contract
-scope, and remaining surface before marking a Case published.
+Published Cases are selected by `visibleCases` in `web/src/cases.ts` and exported as localized static routes. Keep draft Cases excluded from production output unless the existing explicit draft-development switch is enabled. Case progress is keyed by canonical ID, independently of Human Locale and Code Lens.
+
+Run `go run ./tools check --all`, build the single binary, and run the browser E2E suite. Review the [content validator's limits](../testing/content-validation.md): syntax, ID coverage, and synthetic fixtures do not prove a real distributed system. An experienced engineer should review the counterexample, contract scope, and remaining surface before publication.

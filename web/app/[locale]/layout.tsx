@@ -40,12 +40,10 @@ export default async function LocalizedLayout({
                 <span className="brand-mark" aria-hidden="true">
                   F<span>●</span>
                 </span>
-                faultscope
+                FaultScope
               </a>
               <nav aria-label="Main navigation">
-                <a href={`/${locale}/cases/should-you-send-it-again/`}>
-                  {ui(locale, "nav.cases")}
-                </a>
+                <a href={`/${locale}/cases/`}>{ui(locale, "nav.cases")}</a>
                 <a href={`/${locale}/languages/go/`}>
                   {ui(locale, "nav.lenses")}
                 </a>
