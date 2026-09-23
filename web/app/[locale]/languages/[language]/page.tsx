@@ -45,7 +45,7 @@ export default async function LanguagePage({ params }: Props) {
       />
       <a
         className="primary-link"
-        href={`/${locale}/cases/should-you-send-it-again/?lang=${language}`}
+        href={`/${locale}/cases/should-you-send-it-again/?lang=${language}&mode=guided`}
       >
         {ui(locale, "language.cta", { language: name })}{" "}
         <span aria-hidden="true">↗</span>
