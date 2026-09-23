@@ -115,10 +115,14 @@ describe("Case 01 with independent locale and code lens", () => {
     });
     await user.click(screen.getByRole("button", { name: "Next insight" }));
     await user.click(screen.getByRole("button", { name: "Challenge" }));
-    expect(screen.getByRole("heading", { name: "Make the call" })).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "What should the caller do?" }),
+    ).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "Deep Dive" }));
     expect(
-      screen.getByRole("heading", { name: "The edges of the contract" }),
+      screen.getByRole("heading", {
+        name: "Where does the retry guarantee end?",
+      }),
     ).toBeTruthy();
     await user.selectOptions(
       screen.getByRole("combobox", { name: "Choose human language" }),
