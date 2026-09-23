@@ -1,0 +1,38 @@
+import { expect, test } from "@playwright/test";
+
+test.use({
+  viewport: { width: 390, height: 844 },
+  isMobile: true,
+  hasTouch: true,
+});
+
+test("mobile navigation reaches Cases 02 and 03 from Case 01", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("faultscope.v1.codeLens", "go");
+  });
+
+  await page.goto("/zh-TW/cases/should-you-send-it-again/?lang=go");
+  const casesLink = page
+    .getByRole("navigation", { name: "Main navigation" })
+    .getByRole("link", { name: "案例" });
+  await expect(casesLink).toBeVisible();
+
+  await casesLink.click();
+  await expect(page).toHaveURL(/\/zh-TW\/cases\/$/);
+  await page
+    .locator('a[href="/zh-TW/cases/can-the-old-worker-still-commit/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "A 已被接手，還能提交結果嗎？" }),
+  ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/database-committed-where-is-event/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "訂單已確認，事件怎麼沒送出？" }),
+  ).toBeVisible();
+});
