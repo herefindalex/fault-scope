@@ -1,0 +1,16 @@
+{
+  "nav.cases": "กรณี 01",
+  "nav.lenses": "ภาษาโค้ด",
+  "locale.label": "ภาษา",
+  "locale.choose": "เลือกภาษา",
+  "codeLens.label": "ภาษาโค้ด",
+  "codeLens.choose": "เลือกภาษาโค้ด",
+  "case.guided": "แบบมีคำแนะนำ",
+  "case.challenge": "ความท้าทาย",
+  "case.deepDive": "เจาะลึก",
+  "action.next": "ถัดไป",
+  "action.previous": "ก่อนหน้า",
+  "home.title": "เมื่อคำตอบหายไป คุณรู้อะไรบ้าง?",
+  "home.question": "คุณจะส่งอีกครั้งไหม?",
+  "nav.about": "เกี่ยวกับ"
+}

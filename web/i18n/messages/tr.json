@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Vaka 01",
+  "nav.lenses": "Kod dilleri",
+  "locale.label": "Dil",
+  "locale.choose": "Dil seç",
+  "codeLens.label": "Kod dili",
+  "codeLens.choose": "Kod dili seç",
+  "case.guided": "Rehberli",
+  "case.challenge": "Meydan okuma",
+  "case.deepDive": "Derinlemesine",
+  "action.next": "İleri",
+  "action.previous": "Geri",
+  "home.title": "Yanıt gelmediğinde ne bilirsiniz?",
+  "home.question": "Yeniden gönderir misiniz?",
+  "nav.about": "Hakkında"
+}

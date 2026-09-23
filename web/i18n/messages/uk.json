@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Випадок 01",
+  "nav.lenses": "Мови коду",
+  "locale.label": "Мова",
+  "locale.choose": "Вибрати мову",
+  "codeLens.label": "Мова коду",
+  "codeLens.choose": "Вибрати мову коду",
+  "case.guided": "Покроково",
+  "case.challenge": "Завдання",
+  "case.deepDive": "Докладніше",
+  "action.next": "Далі",
+  "action.previous": "Назад",
+  "home.title": "Що ви знаєте, коли відповідь зникає?",
+  "home.question": "Надіслати ще раз?",
+  "nav.about": "Про проєкт"
+}

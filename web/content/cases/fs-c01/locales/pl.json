@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Czy wysłać ponownie?",
+    "observation": "Wywołujący nie otrzymał odpowiedzi o zakończeniu przed upływem terminu."
+  }
+}

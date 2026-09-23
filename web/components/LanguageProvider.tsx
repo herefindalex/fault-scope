@@ -8,6 +8,8 @@ import {
   type Language,
 } from "../src/case";
 import { resolveLanguage } from "../src/language-choice";
+import { ui } from "../i18n/catalog";
+import { GlobalLocaleSelector, useLocale } from "./LocaleProvider";
 
 type LanguageContextValue = {
   language: Language;
@@ -18,7 +20,7 @@ type LanguageContextValue = {
   openChooser: () => void;
 };
 const LanguageContext = createContext<LanguageContextValue | null>(null);
-const preferenceKey = "faultscope.code-lens";
+export const codeLensPreferenceKey = "faultscope.v1.codeLens";
 
 export function useLanguage() {
   const value = useContext(LanguageContext);
@@ -27,6 +29,7 @@ export function useLanguage() {
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const { locale } = useLocale();
   const [language, setLanguage] = useState<Language>("go");
   const [ready, setReady] = useState(false);
   const [needsSelection, setNeedsSelection] = useState(false);
@@ -34,10 +37,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const resolution = resolveLanguage(
-      params.get("lang"),
-      window.localStorage.getItem(preferenceKey),
-    );
+    const saved =
+      window.localStorage.getItem(codeLensPreferenceKey) ??
+      window.localStorage.getItem("faultscope.code-lens");
+    const resolution = resolveLanguage(params.get("lang"), saved);
     setLanguage(resolution.language);
     setNeedsSelection(resolution.prompt);
     setReady(true);
@@ -50,7 +53,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   function choose(next: Language) {
     setLanguage(next);
-    window.localStorage.setItem(preferenceKey, next);
+    window.localStorage.setItem(codeLensPreferenceKey, next);
     const url = new URL(window.location.href);
     url.searchParams.delete("lang");
     window.history.replaceState(null, "", url);
@@ -78,9 +81,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         onClose={skip}
       >
         <div className="dialog-symbol" aria-hidden="true">{`{ }`}</div>
-        <p className="eyebrow">MAKE IT YOURS</p>
-        <h2 id="lens-title">Choose your code lens</h2>
-        <p>The reasoning stays the same. Only the code changes.</p>
+        <GlobalLocaleSelector id="dialog-locale" />
+        <p className="eyebrow">{ui(locale, "codeLens.label")}</p>
+        <h2 id="lens-title">{ui(locale, "codeLens.choose")}</h2>
+        <p>{ui(locale, "codeLens.prompt")}</p>
         <div className="lens-grid">
           {languageIds.map((item) => (
             <button key={item} type="button" onClick={() => choose(item)}>
@@ -89,7 +93,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
           ))}
         </div>
         <button className="text-button" type="button" onClick={skip}>
-          Skip for now · use Go
+          {ui(locale, "codeLens.skip")}
         </button>
       </dialog>
     </LanguageContext.Provider>
@@ -97,19 +101,20 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function GlobalLanguageSelector() {
+  const { locale } = useLocale();
   const { language, ready, choose, openChooser } = useLanguage();
   return (
     <div className="header-lens">
-      <label htmlFor="global-language">Code lens</label>
+      <label htmlFor="global-language">{ui(locale, "codeLens.label")}</label>
       <select
         id="global-language"
-        aria-label="Code lens"
+        aria-label={ui(locale, "codeLens.label")}
         value={ready ? language : ""}
         onChange={(event) => {
           if (isLanguage(event.target.value)) choose(event.target.value);
         }}
       >
-        {!ready && <option value="">Loading</option>}
+        {!ready && <option value="">{ui(locale, "codeLens.loading")}</option>}
         {languageIds.map((item) => (
           <option key={item} value={item}>
             {languageNames[item]}
@@ -119,8 +124,8 @@ export function GlobalLanguageSelector() {
       <button
         className="lens-help"
         type="button"
+        aria-label={ui(locale, "codeLens.choose")}
         onClick={openChooser}
-        aria-label="Choose a code lens"
       >
         ?
       </button>

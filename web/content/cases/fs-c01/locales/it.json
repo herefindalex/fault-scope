@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Dovresti inviarlo di nuovo?",
+    "observation": "Il chiamante non ha ricevuto una risposta di completamento entro la scadenza."
+  }
+}

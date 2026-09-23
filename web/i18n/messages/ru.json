@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Случай 01",
+  "nav.lenses": "Языки кода",
+  "locale.label": "Язык",
+  "locale.choose": "Выбрать язык",
+  "codeLens.label": "Язык кода",
+  "codeLens.choose": "Выбрать язык кода",
+  "case.guided": "Пошагово",
+  "case.challenge": "Задача",
+  "case.deepDive": "Подробнее",
+  "action.next": "Далее",
+  "action.previous": "Назад",
+  "home.title": "Что известно, когда ответ не пришёл?",
+  "home.question": "Отправить повторно?",
+  "nav.about": "О проекте"
+}

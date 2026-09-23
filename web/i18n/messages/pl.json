@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Przypadek 01",
+  "nav.lenses": "Języki kodu",
+  "locale.label": "Język",
+  "locale.choose": "Wybierz język",
+  "codeLens.label": "Język kodu",
+  "codeLens.choose": "Wybierz język kodu",
+  "case.guided": "Z przewodnikiem",
+  "case.challenge": "Wyzwanie",
+  "case.deepDive": "Szczegóły",
+  "action.next": "Dalej",
+  "action.previous": "Wstecz",
+  "home.title": "Co wiesz, gdy odpowiedź nie nadchodzi?",
+  "home.question": "Czy wyślesz ponownie?",
+  "nav.about": "O projekcie"
+}

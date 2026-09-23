@@ -1,0 +1,16 @@
+{
+  "nav.cases": "사례 01",
+  "nav.lenses": "코드 렌즈",
+  "locale.label": "표시 언어",
+  "locale.choose": "표시 언어 선택",
+  "codeLens.label": "코드 렌즈",
+  "codeLens.choose": "코드 렌즈 선택",
+  "case.guided": "안내",
+  "case.challenge": "도전",
+  "case.deepDive": "심화 학습",
+  "action.next": "다음",
+  "action.previous": "이전",
+  "home.title": "응답이 사라졌을 때 무엇을 알 수 있나요?",
+  "home.question": "다시 보내시겠습니까?",
+  "nav.about": "소개"
+}

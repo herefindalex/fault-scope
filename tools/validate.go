@@ -7,17 +7,18 @@ import (
 )
 
 type caseMetadata struct {
-	ID                   string   `json:"id"`
-	Slug                 string   `json:"slug"`
-	Status               string   `json:"status"`
-	GuidedEntry          string   `json:"guided_entry"`
-	ChallengeEntry       string   `json:"challenge_entry"`
-	Steps                []string `json:"steps"`
-	VisualStates         []string `json:"visual_states"`
-	RequiredVisualStates []string `json:"required_visual_states"`
-	SemanticAnchors      []string `json:"semantic_anchors"`
-	CodeLenses           []string `json:"code_lenses"`
-	Sections             []string `json:"sections"`
+	ID                   string              `json:"id"`
+	Slug                 string              `json:"slug"`
+	Status               string              `json:"status"`
+	GuidedEntry          string              `json:"guided_entry"`
+	ChallengeEntry       string              `json:"challenge_entry"`
+	Steps                []string            `json:"steps"`
+	Questions            map[string][]string `json:"questions"`
+	VisualStates         []string            `json:"visual_states"`
+	RequiredVisualStates []string            `json:"required_visual_states"`
+	SemanticAnchors      []string            `json:"semantic_anchors"`
+	CodeLenses           []string            `json:"code_lenses"`
+	Sections             []string            `json:"sections"`
 }
 
 func set(items []string) (map[string]bool, error) {
@@ -84,6 +85,16 @@ func validateCaseData(data []byte) error {
 	}
 	if !steps[c.GuidedEntry] || !steps[c.ChallengeEntry] {
 		return fmt.Errorf("missing guided or challenge entry")
+	}
+	for question, options := range c.Questions {
+		if _, err := set(options); err != nil || question == "" {
+			return fmt.Errorf("invalid options for question %q", question)
+		}
+	}
+	for _, question := range []string{"review", "evidence", "scope", "transfer", "challenge"} {
+		if len(c.Questions[question]) < 2 {
+			return fmt.Errorf("missing question %s", question)
+		}
 	}
 	for _, visual := range c.RequiredVisualStates {
 		if !visuals[visual] {

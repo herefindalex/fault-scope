@@ -1,12 +1,18 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { CaseExperience } from "./CaseExperience";
-import { LanguageProvider } from "./LanguageProvider";
+import { CaseExperience, caseProgressKey } from "./CaseExperience";
+import {
+  LanguageProvider,
+  codeLensPreferenceKey,
+  useLanguage,
+} from "./LanguageProvider";
+import { GlobalLocaleSelector, LocaleProvider } from "./LocaleProvider";
 
 beforeEach(() => {
-  localStorage.setItem("faultscope.code-lens", "go");
-  history.replaceState(null, "", "/cases/should-you-send-it-again/");
+  localStorage.clear();
+  localStorage.setItem(codeLensPreferenceKey, "go");
+  history.replaceState(null, "", "/en/cases/should-you-send-it-again/");
   HTMLDialogElement.prototype.showModal = function () {
     this.setAttribute("open", "");
   };
@@ -16,19 +22,27 @@ beforeEach(() => {
 });
 afterEach(() => cleanup());
 
-function renderCase() {
-  render(
-    <LanguageProvider>
-      <CaseExperience deepDive={<p>Deep Dive content is available.</p>} />
-    </LanguageProvider>,
+function renderCase(locale = "en", navigate?: (url: string) => void) {
+  function LensProbe() {
+    const { language } = useLanguage();
+    return <output data-testid="lens">{language}</output>;
+  }
+  return render(
+    <LocaleProvider locale={locale} navigate={navigate}>
+      <LanguageProvider>
+        <GlobalLocaleSelector />
+        <LensProbe />
+        <CaseExperience />
+      </LanguageProvider>
+    </LocaleProvider>,
   );
 }
 
-describe("Case 01 learning flow", () => {
-  it("reveals the evidence, possible worlds, property, and changing rail", async () => {
+describe("Case 01 with independent locale and code lens", () => {
+  it("reveals evidence, worlds, property, and the reasoning rail", async () => {
     const user = userEvent.setup();
     renderCase();
-    const next = screen.getByRole("button", { name: "Next insight →" });
+    const next = screen.getByRole("button", { name: "Next insight" });
     await user.click(next);
     expect(
       screen.getByRole("heading", { name: "What did the caller observe?" }),
@@ -38,61 +52,87 @@ describe("Case 01 learning flow", () => {
       within(rail).getByText(/No completion response before the caller/),
     ).toBeTruthy();
     await user.click(next);
-    expect(
-      screen.getByRole("heading", { name: "Two possible worlds" }),
-    ).toBeTruthy();
     const worlds = screen.getByRole("group", {
       name: /Two representative executions/,
     });
-    expect(within(worlds).getByText("WORLD A")).toBeTruthy();
-    expect(within(worlds).getByText("WORLD B")).toBeTruthy();
+    expect(within(worlds).getByText("World A")).toBeTruthy();
+    expect(within(worlds).getByText("World B")).toBeTruthy();
     await user.click(next);
     expect(
-      within(rail).getByText(
-        /One logical CreateVM operation must not create two VMs/,
-      ),
+      within(rail).getByText(/One logical CreateVM operation/),
     ).toBeTruthy();
   });
 
-  it("keeps the stronger-contract step while switching code lens", async () => {
+  it("preserves Case, step, answers, visual state, and PHP when switching locale", async () => {
     const user = userEvent.setup();
-    renderCase();
-    const next = screen.getByRole("button", { name: "Next insight →" });
-    for (let i = 0; i < 5; i++) await user.click(next);
+    localStorage.setItem(codeLensPreferenceKey, "php");
+    history.replaceState(
+      null,
+      "",
+      "/zh-TW/cases/should-you-send-it-again/?lang=php",
+    );
+    let destination = "";
+    const first = renderCase("zh-TW", (url) => {
+      destination = url;
+    });
+    await user.click(screen.getByRole("button", { name: /我需要更多資訊/ }));
+    await user.click(screen.getByRole("button", { name: "下一步" }));
+    await user.click(screen.getByRole("button", { name: "下一步" }));
     expect(
-      screen.getByRole("heading", {
-        name: "Change the contract, not the failure",
-      }),
+      screen.getByRole("group", { name: /Two representative executions/ }),
     ).toBeTruthy();
     await user.selectOptions(
-      screen.getByRole("combobox", { name: "Code block language" }),
-      "cpp",
+      screen.getByRole("combobox", { name: "選擇人類語言" }),
+      "ja",
     );
+    expect(destination).toBe("/ja/cases/should-you-send-it-again/?lang=php");
+    expect(localStorage.getItem("faultscope.v1.locale")).toBe("ja");
+    const saved = JSON.parse(localStorage.getItem(caseProgressKey) ?? "{}");
+    expect(saved).toMatchObject({
+      step: "worlds",
+      answers: { review: "option.needMore" },
+      mode: "guided",
+    });
+    first.unmount();
+    history.replaceState(null, "", destination);
+    renderCase("ja");
     expect(
-      screen.getByRole("heading", {
-        name: "Change the contract, not the failure",
-      }),
+      screen.getByRole("group", { name: /Two representative executions/ }),
     ).toBeTruthy();
-    expect(screen.getByText(/VmOutcome retry_same_operation/)).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "二つの可能な実行" }),
+    ).toBeTruthy();
+    expect(screen.getByTestId("lens").textContent).toBe("php");
+    expect(localStorage.getItem(codeLensPreferenceKey)).toBe("php");
   });
 
-  it("supports Challenge and Deep Dive without losing Guided progress", async () => {
+  it("keeps Guided progress across Challenge and Deep Dive", async () => {
     const user = userEvent.setup();
-    renderCase();
-    await user.click(screen.getByRole("button", { name: "Next insight →" }));
+    let destination = "";
+    const first = renderCase("en", (url) => {
+      destination = url;
+    });
+    await user.click(screen.getByRole("button", { name: "Next insight" }));
     await user.click(screen.getByRole("button", { name: "Challenge" }));
     expect(screen.getByRole("heading", { name: "Make the call" })).toBeTruthy();
-    await user.click(
-      screen.getByRole("button", { name: /Keep the operation unresolved/ }),
-    );
-    expect(screen.getByRole("status").textContent).toContain(
-      "Contract A permits A1",
-    );
     await user.click(screen.getByRole("button", { name: "Deep Dive" }));
-    expect(screen.getByText("Deep Dive content is available.")).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Guided" }));
     expect(
-      screen.getByRole("heading", { name: "What did the caller observe?" }),
+      screen.getByRole("heading", { name: "The edges of the contract" }),
+    ).toBeTruthy();
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Choose human language" }),
+      "ar",
+    );
+    expect(destination).toBe(
+      "/ar/cases/should-you-send-it-again/?mode=deep-dive",
+    );
+    first.unmount();
+    history.replaceState(null, "", destination);
+    renderCase("ar");
+    expect(screen.getByRole("heading", { name: "حدود العقد" })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "موجّه" }));
+    expect(
+      screen.getByRole("heading", { name: "ماذا لاحظت الجهة المستدعية؟" }),
     ).toBeTruthy();
   });
 });

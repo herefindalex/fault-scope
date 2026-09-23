@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Fall 01",
+  "nav.lenses": "Code-Sprachen",
+  "locale.label": "Sprache",
+  "locale.choose": "Sprache wählen",
+  "codeLens.label": "Code-Sprache",
+  "codeLens.choose": "Code-Sprache wählen",
+  "case.guided": "Geführt",
+  "case.challenge": "Herausforderung",
+  "case.deepDive": "Vertiefung",
+  "action.next": "Weiter",
+  "action.previous": "Zurück",
+  "home.title": "Wenn die Antwort ausbleibt: Was wissen Sie?",
+  "home.question": "Würden Sie es erneut senden?",
+  "nav.about": "Über uns"
+}

@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Moet je het opnieuw versturen?",
+    "observation": "De aanroeper ontving voor de deadline geen voltooiingsantwoord."
+  }
+}

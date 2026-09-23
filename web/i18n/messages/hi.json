@@ -1,0 +1,16 @@
+{
+  "nav.cases": "केस 01",
+  "nav.lenses": "कोड भाषाएँ",
+  "locale.label": "मानव भाषा",
+  "locale.choose": "भाषा चुनें",
+  "codeLens.label": "कोड भाषा",
+  "codeLens.choose": "कोड भाषा चुनें",
+  "case.guided": "निर्देशित",
+  "case.challenge": "चुनौती",
+  "case.deepDive": "गहराई से",
+  "action.next": "अगला",
+  "action.previous": "पिछला",
+  "home.title": "जब उत्तर नहीं आता, तो आप क्या जानते हैं?",
+  "home.question": "क्या आप फिर से भेजेंगे?",
+  "nav.about": "परिचय"
+}

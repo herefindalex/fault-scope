@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Casus 01",
+  "nav.lenses": "Codeertalen",
+  "locale.label": "Taal",
+  "locale.choose": "Kies een taal",
+  "codeLens.label": "Codeertaal",
+  "codeLens.choose": "Kies een codeertaal",
+  "case.guided": "Begeleid",
+  "case.challenge": "Uitdaging",
+  "case.deepDive": "Verdieping",
+  "action.next": "Volgende",
+  "action.previous": "Vorige",
+  "home.title": "Wat weet je als het antwoord uitblijft?",
+  "home.question": "Zou je het opnieuw versturen?",
+  "nav.about": "Over"
+}

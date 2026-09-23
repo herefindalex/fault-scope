@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Faut-il le renvoyer ?",
+    "observation": "L'appelant n'a pas reçu de réponse d'achèvement avant l'échéance."
+  }
+}

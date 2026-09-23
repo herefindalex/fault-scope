@@ -18,6 +18,17 @@
     "remaining",
     "recap"
   ],
+  "questions": {
+    "review": ["option.yes", "option.no", "option.needMore"],
+    "evidence": ["option.vmNotCreated", "option.vmCreated", "option.neither"],
+    "scope": ["option.scopeYes", "option.scopeNo"],
+    "transfer": ["option.pToP", "option.pToQ"],
+    "challenge": [
+      "option.challengeRepeat",
+      "option.challengeUnresolved",
+      "option.challengeAssume"
+    ]
+  },
   "visual_states": [
     "possible-worlds",
     "weak-counterexample",

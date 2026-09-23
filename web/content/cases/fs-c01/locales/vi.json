@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Bạn có nên gửi lại không?",
+    "observation": "Bên gọi không nhận được phản hồi hoàn tất trước thời hạn."
+  }
+}

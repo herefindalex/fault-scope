@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "Haruskah Anda mengirimnya lagi?",
+    "observation": "Pemanggil tidak menerima respons penyelesaian sebelum batas waktu."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Caso 01",
+  "nav.lenses": "Linguaggi di codice",
+  "locale.label": "Lingua",
+  "locale.choose": "Scegli la lingua",
+  "codeLens.label": "Linguaggio di codice",
+  "codeLens.choose": "Scegli il linguaggio",
+  "case.guided": "Guidato",
+  "case.challenge": "Sfida",
+  "case.deepDive": "Approfondimento",
+  "action.next": "Avanti",
+  "action.previous": "Indietro",
+  "home.title": "Quando la risposta scompare, cosa sai?",
+  "home.question": "Lo invieresti di nuovo?",
+  "nav.about": "Informazioni"
+}

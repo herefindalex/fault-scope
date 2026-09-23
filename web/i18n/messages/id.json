@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Kasus 01",
+  "nav.lenses": "Bahasa kode",
+  "locale.label": "Bahasa",
+  "locale.choose": "Pilih bahasa",
+  "codeLens.label": "Bahasa kode",
+  "codeLens.choose": "Pilih bahasa kode",
+  "case.guided": "Terpandu",
+  "case.challenge": "Tantangan",
+  "case.deepDive": "Pendalaman",
+  "action.next": "Berikutnya",
+  "action.previous": "Sebelumnya",
+  "home.title": "Saat respons hilang, apa yang Anda ketahui?",
+  "home.question": "Apakah Anda akan mengirimnya lagi?",
+  "nav.about": "Tentang"
+}

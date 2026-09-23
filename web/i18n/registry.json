@@ -1,0 +1,142 @@
+[
+  {
+    "id": "en",
+    "nativeName": "English",
+    "englishName": "English",
+    "direction": "ltr",
+    "status": "source"
+  },
+  {
+    "id": "zh-TW",
+    "nativeName": "繁體中文",
+    "englishName": "Traditional Chinese",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "zh-CN",
+    "nativeName": "简体中文",
+    "englishName": "Simplified Chinese",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "ja",
+    "nativeName": "日本語",
+    "englishName": "Japanese",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "ko",
+    "nativeName": "한국어",
+    "englishName": "Korean",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "es",
+    "nativeName": "Español",
+    "englishName": "Spanish",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "fr",
+    "nativeName": "Français",
+    "englishName": "French",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "de",
+    "nativeName": "Deutsch",
+    "englishName": "German",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "pt-BR",
+    "nativeName": "Português (Brasil)",
+    "englishName": "Portuguese (Brazil)",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "it",
+    "nativeName": "Italiano",
+    "englishName": "Italian",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "nl",
+    "nativeName": "Nederlands",
+    "englishName": "Dutch",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "pl",
+    "nativeName": "Polski",
+    "englishName": "Polish",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "tr",
+    "nativeName": "Türkçe",
+    "englishName": "Turkish",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "uk",
+    "nativeName": "Українська",
+    "englishName": "Ukrainian",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "ru",
+    "nativeName": "Русский",
+    "englishName": "Russian",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "ar",
+    "nativeName": "العربية",
+    "englishName": "Arabic",
+    "direction": "rtl",
+    "status": "beta"
+  },
+  {
+    "id": "hi",
+    "nativeName": "हिन्दी",
+    "englishName": "Hindi",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "vi",
+    "nativeName": "Tiếng Việt",
+    "englishName": "Vietnamese",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "th",
+    "nativeName": "ไทย",
+    "englishName": "Thai",
+    "direction": "ltr",
+    "status": "beta"
+  },
+  {
+    "id": "id",
+    "nativeName": "Bahasa Indonesia",
+    "englishName": "Indonesian",
+    "direction": "ltr",
+    "status": "beta"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "caseId": "fs-c01",
+  "stepIds": [],
+  "messages": {
+    "title": "다시 보내야 할까요?",
+    "observation": "호출자는 기한 내에 완료 응답을 받지 못했습니다."
+  }
+}

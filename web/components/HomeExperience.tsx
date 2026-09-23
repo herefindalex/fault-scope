@@ -1,83 +1,80 @@
 "use client";
 
 import { useState } from "react";
-import { caseFacts } from "../src/case";
+import { caseCopy, ui } from "../i18n/catalog";
 import { CodeBlock } from "./CodeBlock";
+import { useLocale } from "./LocaleProvider";
+
+const choices = ["option.yes", "option.no", "option.needMore"] as const;
 
 export function HomeExperience() {
-  const [answer, setAnswer] = useState<string | null>(null);
+  const { locale } = useLocale();
+  const [answer, setAnswer] = useState<(typeof choices)[number] | null>(null);
+  const c = (key: Parameters<typeof caseCopy>[1]) => caseCopy(locale, key);
+  const t = (
+    key: Parameters<typeof ui>[1],
+    values?: Record<string, string | number>,
+  ) => ui(locale, key, values);
   return (
     <main>
       <section className="hero page-wrap">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span className="live-dot" /> INTERACTIVE CORRECTNESS LAB · CASE 01
+            <span className="live-dot" /> {t("home.eyebrow")}
           </p>
-          <h1>
-            When the response disappears, <em>what do you know?</em>
-          </h1>
-          <p className="hero-lead">
-            Real distributed failures make ordinary code hard to judge. Follow
-            the evidence, test the contract, and see which next action the
-            property permits.
-          </p>
+          <h1>{t("home.title")}</h1>
+          <p className="hero-lead">{t("home.lead")}</p>
           <div className="hero-badges">
-            <span>01 / CREATE VM</span>
-            <span>7 CODE LENSES</span>
-            <span>~8 MINUTES</span>
+            <span>{t("home.createVm")}</span>
+            <span>{t("home.lenses")}</span>
+            <span>{t("home.duration")}</span>
           </div>
         </div>
         <div className="hero-index" aria-hidden="true">
           <span>01</span>
-          <small>
-            THE MISSING
-            <br />
-            RESPONSE
-          </small>
+          <small>{t("home.missingResponse")}</small>
         </div>
       </section>
       <section className="home-lab page-wrap" aria-labelledby="home-lab-title">
         <div className="section-heading">
-          <p className="eyebrow">START WITH CODE</p>
-          <h2 id="home-lab-title">This code looks reasonable.</h2>
-          <p>{caseFacts.observation}</p>
+          <p className="eyebrow">{t("home.start")}</p>
+          <h2 id="home-lab-title">{t("home.codeReasonable")}</h2>
+          <p>{c("observation")}</p>
         </div>
         <CodeBlock anchor="fs-c01.retry-independent-attempt" />
         <div className="question-card">
           <div>
-            <p className="eyebrow">YOUR FIRST INSTINCT</p>
-            <h3>Would you send it again?</h3>
+            <p className="eyebrow">{t("home.instinct")}</p>
+            <h3>{t("home.question")}</h3>
           </div>
           <div className="answer-row">
-            {["Yes", "No", "I need more information"].map((option) => (
+            {choices.map((option) => (
               <button
                 type="button"
                 key={option}
                 aria-pressed={answer === option}
                 onClick={() => setAnswer(option)}
               >
-                {option}
+                {c(option)}
               </button>
             ))}
           </div>
           {answer && (
             <p className="answer-note">
-              You chose “{answer}.” Keep that thought; the observation alone
-              does not settle the decision.
+              {t("home.answerNote", { answer: c(answer) })}
             </p>
           )}
-          <a className="primary-link" href="/cases/should-you-send-it-again/">
-            See what the caller actually knows <span aria-hidden="true">→</span>
+          <a
+            className="primary-link"
+            href={`/${locale}/cases/should-you-send-it-again/`}
+          >
+            {t("home.cta")} <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
       <section className="home-principle page-wrap">
-        <span className="section-number">THE METHOD</span>
-        <p>
-          Evidence tells you what happened <strong>locally.</strong> The
-          contract tells you what the other side may still do. The property
-          tells you what must remain true.
-        </p>
+        <span className="section-number">{t("home.methodLabel")}</span>
+        <p>{t("home.method")}</p>
       </section>
     </main>
   );

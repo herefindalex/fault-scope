@@ -16,6 +16,7 @@ type devOptions struct {
 	listen        string
 	caseID        string
 	language      string
+	locale        string
 	mode          string
 }
 
@@ -27,7 +28,7 @@ func parseDevOptions(args []string) (devOptions, error) {
 			options.open = true
 		case "--include-drafts":
 			options.includeDrafts = true
-		case "--listen", "--case", "--language", "--mode":
+		case "--listen", "--case", "--language", "--mode", "--locale":
 			if i+1 >= len(args) {
 				return options, fmt.Errorf("missing value for %s", args[i])
 			}
@@ -40,6 +41,8 @@ func parseDevOptions(args []string) (devOptions, error) {
 				options.caseID = args[i]
 			case "--language":
 				options.language = args[i]
+			case "--locale":
+				options.locale = args[i]
 			case "--mode":
 				options.mode = args[i]
 			}
@@ -64,13 +67,25 @@ func parseDevOptions(args []string) (devOptions, error) {
 	if options.mode != "" && options.mode != "guided" && options.mode != "challenge" && options.mode != "deep-dive" {
 		return options, fmt.Errorf("unknown mode %s", options.mode)
 	}
+	if options.locale != "" {
+		if err := validateLocalization(options.locale); err != nil {
+			return options, err
+		}
+	}
 	return options, nil
 }
 
 func (options devOptions) target(base string) string {
 	path := "/"
 	if options.caseID != "" || options.mode != "" {
-		path = "/cases/should-you-send-it-again/"
+		path = "/en/cases/should-you-send-it-again/"
+	}
+	if options.locale != "" {
+		if options.caseID != "" || options.mode != "" {
+			path = "/" + options.locale + "/cases/should-you-send-it-again/"
+		} else {
+			path = "/" + options.locale + "/"
+		}
 	}
 	values := url.Values{}
 	if options.language != "" {

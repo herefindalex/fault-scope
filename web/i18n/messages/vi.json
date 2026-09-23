@@ -1,0 +1,16 @@
+{
+  "nav.cases": "Tình huống 01",
+  "nav.lenses": "Ngôn ngữ mã",
+  "locale.label": "Ngôn ngữ",
+  "locale.choose": "Chọn ngôn ngữ",
+  "codeLens.label": "Ngôn ngữ mã",
+  "codeLens.choose": "Chọn ngôn ngữ mã",
+  "case.guided": "Có hướng dẫn",
+  "case.challenge": "Thử thách",
+  "case.deepDive": "Tìm hiểu sâu",
+  "action.next": "Tiếp",
+  "action.previous": "Trước",
+  "home.title": "Khi phản hồi biến mất, bạn biết điều gì?",
+  "home.question": "Bạn có gửi lại không?",
+  "nav.about": "Giới thiệu"
+}

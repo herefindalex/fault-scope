@@ -1,0 +1,16 @@
+{
+  "nav.cases": "案例 01",
+  "nav.lenses": "代码视角",
+  "locale.label": "人类语言",
+  "locale.choose": "选择人类语言",
+  "codeLens.label": "代码视角",
+  "codeLens.choose": "选择代码视角",
+  "case.guided": "引导",
+  "case.challenge": "挑战",
+  "case.deepDive": "深入探讨",
+  "action.next": "下一步",
+  "action.previous": "上一步",
+  "home.title": "当响应消失时，你知道什么？",
+  "home.question": "你会再发送一次吗？",
+  "nav.about": "关于"
+}

@@ -85,7 +85,14 @@ func smoke() error {
 		return body, nil
 	}
 	var home []byte
-	for _, route := range []string{"/", "/cases/should-you-send-it-again/", "/languages/go/", "/languages/php/", "/languages/cpp/"} {
+	for _, route := range []string{
+		"/", "/en/", "/zh-TW/", "/ja/", "/ar/", "/ja/about/",
+		"/cases/should-you-send-it-again/", "/languages/php/",
+		"/en/cases/should-you-send-it-again/",
+		"/zh-TW/cases/should-you-send-it-again/",
+		"/ja/cases/should-you-send-it-again/",
+		"/en/languages/go/", "/ja/languages/cpp/", "/ar/languages/c/",
+	} {
 		body, err := get("GET", route, 200, "no-cache")
 		if err != nil {
 			return err
@@ -93,15 +100,22 @@ func smoke() error {
 		if route == "/" {
 			home = body
 		}
+		if route == "/ar/" && !bytes.Contains(body, []byte(`<html lang="ar" dir="rtl">`)) {
+			return fmt.Errorf("Arabic page missing RTL document")
+		}
+		if route == "/ar/languages/c/" && !bytes.Contains(body, []byte(`<pre dir="ltr">`)) {
+			return fmt.Errorf("Arabic code block missing LTR direction")
+		}
 	}
 	for _, check := range []struct {
 		method, route string
 		status        int
 		cache         string
 	}{
-		{"HEAD", "/", 200, "no-cache"}, {"HEAD", "/cases/should-you-send-it-again/", 200, "no-cache"},
+		{"HEAD", "/", 200, "no-cache"}, {"HEAD", "/en/cases/should-you-send-it-again/", 200, "no-cache"},
 		{"HEAD", "/api/version", 200, "no-store"}, {"GET", "/healthz", 200, "no-store"},
-		{"GET", "/not-real/", 404, ""}, {"POST", "/", 405, ""},
+		{"GET", "/not-real/", 404, ""}, {"GET", "/xx-INVALID/cases/should-you-send-it-again/", 404, ""},
+		{"POST", "/", 405, ""},
 	} {
 		if _, err := get(check.method, check.route, check.status, check.cache); err != nil {
 			return err

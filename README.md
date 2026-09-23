@@ -45,6 +45,15 @@ Use `--case fs-c01 --language php --mode guided` with `dev` or `preview` to open
 
 Generated `web/out`, `web/src/generated`, `internal/webui/dist`, and `dist` are ignored. A release binary is built with `CGO_ENABLED=0`.
 
+## Human locales
+
+Localized static routes include `/en/`, `/ja/cases/should-you-send-it-again/`,
+and `/ar/languages/c/`. Human Locale changes prose and layout; Code Lens
+changes source code independently. English is the complete source locale.
+The other 19 locale catalogs are beta and incomplete, with explicit English
+fallback. See the [translation workflow](docs/i18n.md) for status, validation,
+preview commands, and build-time SEO configuration.
+
 ## Case 01 scope
 
 The teaching model says the caller received no completion response before its deadline and cannot establish that the request never left. World A has no VM; World B has a VM whose completion response is unavailable. Both fit the same local observation. The stated property is that one logical `CreateVM` operation must not create two VMs.

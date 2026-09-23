@@ -1,3 +1,5 @@
+import caseData from "./case-data.json";
+
 export const languageIds = [
   "go",
   "typescript",
@@ -36,6 +38,7 @@ export const steps = [
   "recap",
 ] as const;
 export type Step = (typeof steps)[number];
+export const questionOptions = caseData.questions;
 export type Mode = "guided" | "challenge" | "deep-dive";
 export type CaseState = {
   mode: Mode;
@@ -69,12 +72,3 @@ export function caseReducer(state: CaseState, action: CaseAction): CaseState {
       : Math.max(index - 1, 0);
   return { ...state, step: steps[next] };
 }
-
-export const caseFacts = {
-  observation: "No completion response before the caller’s deadline.",
-  property: "One logical CreateVM operation must not create two VMs.",
-  weakContract:
-    "No documented repeat protection; no additional outcome evidence.",
-  strongContract:
-    "Compatible repeats carrying P are one logical operation; the receiver will not create a second VM for P within its defined scope.",
-};

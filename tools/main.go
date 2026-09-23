@@ -64,6 +64,9 @@ func build() error {
 	if err := validateCase(); err != nil {
 		return err
 	}
+	if err := validateLocalization(""); err != nil {
+		return err
+	}
 	published, err := publishedCaseIDs()
 	if err != nil {
 		return err
@@ -127,6 +130,9 @@ func check() error {
 	if err := validateCase(); err != nil {
 		return err
 	}
+	if err := validateLocalization(""); err != nil {
+		return err
+	}
 	if err := os.RemoveAll("web/.next/types"); err != nil {
 		return err
 	}
@@ -144,7 +150,7 @@ func check() error {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "usage: go run ./tools {generate|dev|preview|check|build|doctor}")
+		fmt.Fprintln(os.Stderr, "usage: go run ./tools {generate|dev|preview|check|build|smoke|doctor}")
 		os.Exit(2)
 	}
 	var err error
@@ -192,12 +198,12 @@ func main() {
 			err = command(filepath.Join(".", "dist", name), args...)
 		}
 	case "check":
-		all, language, caseID := false, "", ""
+		all, language, caseID, locale := false, "", "", ""
 		for i := 2; i < len(os.Args); i++ {
 			switch os.Args[i] {
 			case "--all":
 				all = true
-			case "--language", "--case":
+			case "--language", "--case", "--locale":
 				if i+1 >= len(os.Args) {
 					err = fmt.Errorf("missing value for %s", os.Args[i])
 					break
@@ -205,8 +211,10 @@ func main() {
 				i++
 				if os.Args[i-1] == "--language" {
 					language = os.Args[i]
-				} else {
+				} else if os.Args[i-1] == "--case" {
 					caseID = os.Args[i]
+				} else {
+					locale = os.Args[i]
 				}
 			default:
 				err = fmt.Errorf("unknown check option %s", os.Args[i])
@@ -216,7 +224,10 @@ func main() {
 			err = fmt.Errorf("unknown case %s", caseID)
 		}
 		if err == nil {
-			if language != "" {
+			if locale != "" {
+				err = validateLocalization(locale)
+			}
+			if err == nil && language != "" {
 				err = generateSnippets()
 				if err == nil {
 					err = validateCase()
@@ -224,7 +235,7 @@ func main() {
 				if err == nil {
 					err = checkLanguage(language)
 				}
-			} else {
+			} else if err == nil && locale == "" {
 				err = check()
 				if err == nil && all {
 					for _, item := range languages {
