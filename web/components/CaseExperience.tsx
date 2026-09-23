@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useReducer } from "react";
-import DeepDive from "../content/deep-dive.mdx";
 import {
   caseFacts,
   caseReducer,
@@ -440,7 +439,7 @@ function GuidedStep({
   return exhaustive;
 }
 
-export function CaseExperience() {
+export function CaseExperience({ deepDive }: { deepDive: React.ReactNode }) {
   const [state, dispatch] = useReducer(caseReducer, initialCaseState);
   useEffect(() => {
     const mode = new URLSearchParams(window.location.search).get("mode");
@@ -555,7 +554,7 @@ export function CaseExperience() {
         <article className="deep-dive">
           <p className="eyebrow">DEEP DIVE / CASE 01</p>
           <h2>The edges of the contract</h2>
-          <DeepDive />
+          {deepDive}
         </article>
       )}
     </main>

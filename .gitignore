@@ -10,3 +10,5 @@ web/src/generated/
 internal/webui/dist/
 dist/
 /faultscope
+**/__pycache__/
+*.pyc

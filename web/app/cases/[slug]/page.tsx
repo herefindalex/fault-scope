@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CaseExperience } from "../../../components/CaseExperience";
+import DeepDive from "../../../content/deep-dive.mdx";
 import caseData from "../../../src/case-data.json";
 
 const visible =
@@ -18,5 +19,5 @@ export default async function CasePage({
 }) {
   const { slug } = await params;
   if (!visible || slug !== caseData.slug) notFound();
-  return <CaseExperience />;
+  return <CaseExperience deepDive={<DeepDive />} />;
 }

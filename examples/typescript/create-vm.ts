@@ -1,7 +1,7 @@
 type VmSpec = { size: string };
 type Client = { createVM(operationId: string | null, spec: VmSpec): Promise<void> };
-class NoCompletionResponse extends Error {}
-class Unresolved extends Error {}
+export class NoCompletionResponse extends Error {}
+export class Unresolved extends Error {}
 
 // faultscope:begin fs-c01.retry-independent-attempt
 export async function retryIndependent(client: Client, spec: VmSpec): Promise<void> {

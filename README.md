@@ -34,7 +34,7 @@ go run ./tools smoke     # after build: exercise the actual executable
 
 Use `--case fs-c01 --language php --mode guided` with `dev` or `preview` to open a specific entry point. Development can expose draft cases with `dev --include-drafts`; production export includes published cases only.
 
-`check --language` invokes only that language's reference toolchain. CI runs Go, TypeScript, Python, Java, PHP, C, and C++ checks independently. The Go behavioral fixture demonstrates an allowed two-VM execution under the weak contract, a one-VM `P → P` repeat under the stronger contract, and a two-VM `P → Q` scope failure.
+`check --language` invokes only that language's reference toolchain. CI runs Go, TypeScript, Python, Java, PHP, C, and C++ checks independently. Each language fixture demonstrates an allowed two-VM execution under the weak contract, a one-VM `P → P` repeat under the stronger contract, and a two-VM `P → Q` scope failure.
 
 ## Architecture
 
