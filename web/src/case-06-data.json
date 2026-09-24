@@ -1,0 +1,70 @@
+{
+  "id": "fs-c06",
+  "slug": "the-read-succeeded-is-it-fresh-enough",
+  "status": "published",
+  "guided_entry": "write-success",
+  "challenge_entry": "projection-behind",
+  "steps": [
+    "write-success",
+    "revision-token",
+    "http-200",
+    "projection-behind",
+    "transport-question",
+    "freshness-question",
+    "separate",
+    "property",
+    "sleep",
+    "value-poll",
+    "minimum-revision",
+    "reject-43",
+    "catch-up",
+    "positive-44",
+    "positive-45",
+    "eventual-control",
+    "lost-token",
+    "cache",
+    "remaining",
+    "transfer",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.reject", "option.httpOk", "option.sleep"]
+  },
+  "visual_states": [
+    "write-committed",
+    "transport-success",
+    "projection-behind",
+    "revision-gap",
+    "not-fresh-enough",
+    "caught-up-44",
+    "satisfied-44",
+    "satisfied-45",
+    "eventual-43",
+    "lost-token",
+    "cache-gap",
+    "lower-bound"
+  ],
+  "required_visual_states": [
+    "projection-behind",
+    "revision-gap",
+    "not-fresh-enough",
+    "satisfied-44",
+    "satisfied-45"
+  ],
+  "semantic_anchors": [
+    "fs-c06.read-current-projection",
+    "fs-c06.sleep-before-read",
+    "fs-c06.read-at-least-revision",
+    "fs-c06.reject-insufficient-revision",
+    "fs-c06.serve-fresh-enough-projection"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": [
+    "property",
+    "counterexample",
+    "positive-control",
+    "scope-challenge",
+    "remaining",
+    "transfer"
+  ]
+}

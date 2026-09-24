@@ -27,6 +27,7 @@ Product locale coverage is described in the Human Locale section below.
 - [Case 03 durability model](cases/fs-c03.md)
 - [Case 04 delivery model](cases/fs-c04.md)
 - [Case 05 ordering model](cases/fs-c05.md)
+- [Case 06 freshness model](cases/fs-c06.md)
 
 ## Architecture
 

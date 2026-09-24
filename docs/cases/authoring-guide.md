@@ -1,6 +1,6 @@
 # How to author a Case
 
-A FaultScope Case teaches one correctness decision under a concrete failure model. Use [Case 01](fs-c01.md), [Case 02](fs-c02.md), [Case 03](fs-c03.md), [Case 04](fs-c04.md), and [Case 05](fs-c05.md) as references. The shared infrastructure supports multiple Cases; a new Case still needs its own reasoning content, visual, Code Lens source regions, translations, and behavioral evidence.
+A FaultScope Case teaches one correctness decision under a concrete failure model. Use [Case 01](fs-c01.md), [Case 02](fs-c02.md), [Case 03](fs-c03.md), [Case 04](fs-c04.md), [Case 05](fs-c05.md), and [Case 06](fs-c06.md) as references. The shared infrastructure supports multiple Cases; a new Case still needs its own reasoning content, visual, Code Lens source regions, translations, and behavioral evidence.
 
 ## 1. Define the semantic contract
 

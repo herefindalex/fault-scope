@@ -17,6 +17,7 @@ const cases = [
   readJson<CaseDefinition>("../src/case-03-data.json"),
   readJson<CaseDefinition>("../src/case-04-data.json"),
   readJson<CaseDefinition>("../src/case-05-data.json"),
+  readJson<CaseDefinition>("../src/case-06-data.json"),
 ];
 const englishUI = readJson<Record<string, string>>("../i18n/messages/en.json");
 
@@ -87,7 +88,8 @@ for (const definition of cases) {
       );
       for (const section of definition.id === "fs-c03" ||
       definition.id === "fs-c04" ||
-      definition.id === "fs-c05"
+      definition.id === "fs-c05" ||
+      definition.id === "fs-c06"
         ? [1, 2, 3, 4, 5]
         : [1, 2, 3, 4]) {
         await expect(page.locator(".deep-dive")).toContainText(
@@ -192,7 +194,9 @@ test("each case uses its own visual and all seven Code Lenses", async ({
             ? ".durability-domains"
             : definition.id === "fs-c04"
               ? ".delivery-timeline"
-              : ".source-arrival-visual",
+              : definition.id === "fs-c05"
+                ? ".source-arrival-visual"
+                : ".revision-gap-visual",
       ),
     ).toBeVisible();
     for (const language of [
@@ -328,5 +332,54 @@ test("FS-C05 separates source order from arrival order and rejects regression", 
   await expect(page.locator(".source-arrival-visual")).toContainText("E50");
   await expect(page.locator(".source-arrival-visual")).toContainText(
     catalog.messages["visual.applied43"],
+  );
+});
+
+test("FS-C06 enforces a requested minimum rather than HTTP or exact value", async ({
+  page,
+}) => {
+  const case06 = cases.find((definition) => definition.id === "fs-c06")!;
+  const catalog = readJson<CaseCatalog>(
+    "../content/cases/fs-c06/locales/en.json",
+  );
+  await page.goto(`/en/cases/${case06.slug}/?mode=guided&lang=go`);
+  const next = page.getByRole("button", { name: englishUI["action.next"] });
+  for (let index = 0; index < 5; index++) await next.click();
+  await expect(page.locator(".revision-gap-visual")).toContainText(
+    catalog.messages["visual.notFresh"],
+  );
+  await expect(page.locator(".revision-gap-visual")).toContainText(
+    catalog.messages["visual.required44"],
+  );
+  for (let index = 5; index < 13; index++) await next.click();
+  await expect(page.locator(".revision-gap-visual")).toHaveAttribute(
+    "data-state",
+    "satisfied-44",
+  );
+  await next.click();
+  await expect(page.locator(".revision-gap-visual")).toHaveAttribute(
+    "data-state",
+    "satisfied-45",
+  );
+  await expect(page.locator(".revision-gap-visual")).toContainText(
+    catalog.messages["visual.projection45"],
+  );
+  await next.click();
+  await expect(page.locator(".revision-gap-visual")).toHaveAttribute(
+    "data-state",
+    "eventual-43",
+  );
+  await next.click();
+  await next.click();
+  await expect(page.locator(".revision-gap-visual")).toContainText(
+    catalog.messages["visual.cacheGap"],
+  );
+  await next.click();
+  await expect(page.locator(".revision-gap-visual")).toContainText(
+    catalog.messages["visual.lowerBound"],
+  );
+  await page.reload();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.remaining.title"],
   );
 });
