@@ -39,6 +39,26 @@ import c1l16 from "../content/cases/fs-c03/locales/hi.json";
 import c1l17 from "../content/cases/fs-c03/locales/vi.json";
 import c1l18 from "../content/cases/fs-c03/locales/th.json";
 import c1l19 from "../content/cases/fs-c03/locales/id.json";
+import c2l0 from "../content/cases/fs-c04/locales/en.json";
+import c2l1 from "../content/cases/fs-c04/locales/zh-TW.json";
+import c2l2 from "../content/cases/fs-c04/locales/zh-CN.json";
+import c2l3 from "../content/cases/fs-c04/locales/ja.json";
+import c2l4 from "../content/cases/fs-c04/locales/ko.json";
+import c2l5 from "../content/cases/fs-c04/locales/es.json";
+import c2l6 from "../content/cases/fs-c04/locales/fr.json";
+import c2l7 from "../content/cases/fs-c04/locales/de.json";
+import c2l8 from "../content/cases/fs-c04/locales/pt-BR.json";
+import c2l9 from "../content/cases/fs-c04/locales/it.json";
+import c2l10 from "../content/cases/fs-c04/locales/nl.json";
+import c2l11 from "../content/cases/fs-c04/locales/pl.json";
+import c2l12 from "../content/cases/fs-c04/locales/tr.json";
+import c2l13 from "../content/cases/fs-c04/locales/uk.json";
+import c2l14 from "../content/cases/fs-c04/locales/ru.json";
+import c2l15 from "../content/cases/fs-c04/locales/ar.json";
+import c2l16 from "../content/cases/fs-c04/locales/hi.json";
+import c2l17 from "../content/cases/fs-c04/locales/vi.json";
+import c2l18 from "../content/cases/fs-c04/locales/th.json";
+import c2l19 from "../content/cases/fs-c04/locales/id.json";
 
 export const catalogs = {
   "fs-c02": {
@@ -84,5 +104,27 @@ export const catalogs = {
     vi: c1l17.messages,
     th: c1l18.messages,
     id: c1l19.messages,
+  },
+  "fs-c04": {
+    en: c2l0.messages,
+    "zh-TW": c2l1.messages,
+    "zh-CN": c2l2.messages,
+    ja: c2l3.messages,
+    ko: c2l4.messages,
+    es: c2l5.messages,
+    fr: c2l6.messages,
+    de: c2l7.messages,
+    "pt-BR": c2l8.messages,
+    it: c2l9.messages,
+    nl: c2l10.messages,
+    pl: c2l11.messages,
+    tr: c2l12.messages,
+    uk: c2l13.messages,
+    ru: c2l14.messages,
+    ar: c2l15.messages,
+    hi: c2l16.messages,
+    vi: c2l17.messages,
+    th: c2l18.messages,
+    id: c2l19.messages,
   },
 } as const;

@@ -25,6 +25,7 @@ Product locale coverage is described in the Human Locale section below.
 - [Case 01 semantic model](cases/fs-c01.md)
 - [Case 02 authority model](cases/fs-c02.md)
 - [Case 03 durability model](cases/fs-c03.md)
+- [Case 04 delivery model](cases/fs-c04.md)
 
 ## Architecture
 

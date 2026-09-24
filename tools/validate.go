@@ -25,12 +25,14 @@ var caseMetadataPaths = []string{
 	"web/src/case-data.json",
 	"web/src/case-02-data.json",
 	"web/src/case-03-data.json",
+	"web/src/case-04-data.json",
 }
 
 var canonicalSlugs = map[string]string{
 	"fs-c01": "should-you-send-it-again",
 	"fs-c02": "can-the-old-worker-still-commit",
 	"fs-c03": "database-committed-where-is-event",
+	"fs-c04": "consumer-finished-why-run-again",
 }
 
 var requiredCaseAnchors = map[string][]string{
@@ -52,6 +54,13 @@ var requiredCaseAnchors = map[string][]string{
 		"fs-c03.durable-publication-intent",
 		"fs-c03.relay-publish",
 		"fs-c03.mark-publication-complete",
+	},
+	"fs-c04": {
+		"fs-c04.effect-then-ack",
+		"fs-c04.ack-before-effect",
+		"fs-c04.apply-event-once",
+		"fs-c04.redelivery-no-repeat",
+		"fs-c04.separate-dedupe-record",
 	},
 }
 

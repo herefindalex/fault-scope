@@ -15,6 +15,7 @@ const locales = readJson<RegistryEntry[]>("../i18n/registry.json").filter(
 const cases = [
   readJson<CaseDefinition>("../src/case-02-data.json"),
   readJson<CaseDefinition>("../src/case-03-data.json"),
+  readJson<CaseDefinition>("../src/case-04-data.json"),
 ];
 const englishUI = readJson<Record<string, string>>("../i18n/messages/en.json");
 
@@ -83,7 +84,8 @@ for (const definition of cases) {
       await expect(page.locator(".deep-dive")).toContainText(
         catalog.messages["takeaway"],
       );
-      for (const section of definition.id === "fs-c03"
+      for (const section of definition.id === "fs-c03" ||
+      definition.id === "fs-c04"
         ? [1, 2, 3, 4, 5]
         : [1, 2, 3, 4]) {
         await expect(page.locator(".deep-dive")).toContainText(
@@ -184,7 +186,9 @@ test("each case uses its own visual and all seven Code Lenses", async ({
       page.locator(
         definition.id === "fs-c02"
           ? ".authority-timeline"
-          : ".durability-domains",
+          : definition.id === "fs-c03"
+            ? ".durability-domains"
+            : ".delivery-timeline",
       ),
     ).toBeVisible();
     for (const language of [
@@ -217,4 +221,48 @@ test("each case uses its own visual and all seven Code Lenses", async ({
       );
     }
   }
+});
+
+test("FS-C04 shows the repeated effect and the atomic repair", async ({
+  page,
+}) => {
+  const case04 = cases.find((definition) => definition.id === "fs-c04")!;
+  const catalog = readJson<CaseCatalog>(
+    "../content/cases/fs-c04/locales/en.json",
+  );
+  await page.goto(`/en/cases/${case04.slug}/?mode=guided&lang=go`);
+  const next = page.getByRole("button", { name: englishUI["action.next"] });
+
+  for (let index = 0; index < 7; index++) await next.click();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.repeated-effect.title"],
+  );
+  await expect(page.locator(".delivery-timeline")).toContainText(
+    catalog.messages["visual.twice"],
+  );
+
+  for (let index = 7; index < 14; index++) await next.click();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.suppress-repeat.title"],
+  );
+  await expect(page.locator(".delivery-timeline")).toContainText(
+    catalog.messages["visual.suppressed"],
+  );
+  await expect(page.locator(".delivery-timeline")).toContainText(
+    catalog.messages["visual.canAck"],
+  );
+
+  await page.reload();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.suppress-repeat.title"],
+  );
+
+  for (let index = 14; index < 17; index++) await next.click();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.repeat-safe-control.title"],
+  );
+  await expect(page.locator(".repeat-safe-control")).toContainText(
+    "SetShipmentState(S, READY)",
+  );
+  await expect(page.locator(".delivery-timeline")).toHaveCount(0);
 });

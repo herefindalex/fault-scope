@@ -2,7 +2,7 @@
 
 import case02 from "../src/case-02-data.json";
 import case03 from "../src/case-03-data.json";
-import { extraCaseCopy, type ExtraCaseId } from "../i18n/extra-cases";
+import { extraCaseCopy } from "../i18n/extra-cases";
 import { ui } from "../i18n/catalog";
 import type { Anchor } from "../src/snippets";
 import {
@@ -16,13 +16,14 @@ import { useLocale } from "./LocaleProvider";
 import { caseProgressKey, useCaseProgress } from "./useCaseProgress";
 
 const cases = { "fs-c02": case02, "fs-c03": case03 };
+type LaterCaseId = keyof typeof cases;
 const choiceIds = ["option.yes", "option.no", "option.needMore"] as const;
 
-export function laterCaseProgressKey(caseId: ExtraCaseId): string {
+export function laterCaseProgressKey(caseId: LaterCaseId): string {
   return caseProgressKey(caseId);
 }
 
-function stepAnchor(caseId: ExtraCaseId, index: number): Anchor {
+function stepAnchor(caseId: LaterCaseId, index: number): Anchor {
   if (caseId === "fs-c02") {
     if (index >= 12) return "fs-c02.local-authority-check";
     if (index >= 11) return "fs-c02.current-generation-commit";
@@ -128,7 +129,7 @@ function DurabilityDomains({
   );
 }
 
-export function LaterCaseExperience({ caseId }: { caseId: ExtraCaseId }) {
+export function LaterCaseExperience({ caseId }: { caseId: LaterCaseId }) {
   const { locale } = useLocale();
   const definition = cases[caseId];
   const steps = definition.steps;
