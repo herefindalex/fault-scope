@@ -1,12 +1,13 @@
 # Case model
 
-A FaultScope Case is an authored lesson about one correctness decision under failure. Three Cases are published:
+A FaultScope Case is an authored lesson about one correctness decision under failure. Four Cases are published:
 
 | Case | Primary question | Reasoning dimension |
 | --- | --- | --- |
 | [FS-C01](fs-c01.md) | Should you send it again? | Ambiguous outcome and identity |
 | [FS-C02](fs-c02.md) | Can the old worker still commit? | Authority |
 | [FS-C03](fs-c03.md) | The database committed. Where is the event? | Durability and atomicity |
+| [FS-C04](fs-c04.md) | The consumer finished. Why did it run again? | Delivery and repeated effects |
 
 The [Case registry](../../web/src/cases.ts) holds stable identity and structural metadata. [CaseShell](../../web/components/CaseShell.tsx) and [useCaseProgress](../../web/components/useCaseProgress.ts) handle shared interaction and per-Case persistence. Each Case owns its failure model, reasoning, rail values, and visual. Code Lenses present the same semantics in seven programming languages; Human Locales change only the explanation and interface language. Neither changes the canonical Case state.
 

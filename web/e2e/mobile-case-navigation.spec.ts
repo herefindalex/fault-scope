@@ -6,7 +6,7 @@ test.use({
   hasTouch: true,
 });
 
-test("mobile navigation reaches Cases 02 and 03 from Case 01", async ({
+test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -34,5 +34,15 @@ test("mobile navigation reaches Cases 02 and 03 from Case 01", async ({
     .click();
   await expect(
     page.getByRole("heading", { name: "訂單已確認，事件怎麼沒送出？" }),
+  ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/consumer-finished-why-run-again/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", {
+      name: "消費端明明處理完了，為什麼又執行一次？",
+    }),
   ).toBeVisible();
 });

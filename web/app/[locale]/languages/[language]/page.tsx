@@ -7,6 +7,7 @@ import { isLocale } from "../../../../i18n/locale";
 import { localizedMetadata } from "../../../../i18n/metadata";
 import case02 from "../../../../src/case-02-data.json";
 import case03 from "../../../../src/case-03-data.json";
+import case04 from "../../../../src/case-04-data.json";
 import {
   languageIds,
   languageNames,
@@ -70,6 +71,12 @@ export default async function LanguagePage({ params }: Props) {
             slug: case03.slug,
             anchor: "fs-c03.split-dual-write" as const,
             label: "anchor.split-dual-write",
+          },
+          {
+            id: "fs-c04" as const,
+            slug: case04.slug,
+            anchor: "fs-c04.effect-then-ack" as const,
+            label: "anchor.effect-then-ack",
           },
         ].map((entry) => (
           <section key={entry.id} className="language-case-card">

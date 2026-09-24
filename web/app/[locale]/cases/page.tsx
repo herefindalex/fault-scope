@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { caseCopy, ui } from "../../../i18n/catalog";
-import { extraCaseCopy } from "../../../i18n/extra-cases";
+import { extraCaseCopy, type ExtraCaseId } from "../../../i18n/extra-cases";
 import { isLocale } from "../../../i18n/locale";
 import { localizedMetadata } from "../../../i18n/metadata";
 import { visibleCases } from "../../../src/cases";
@@ -16,19 +16,11 @@ function caseEntries(locale: Locale) {
       title:
         definition.id === "fs-c01"
           ? caseCopy(locale, "title")
-          : extraCaseCopy(
-              definition.id as "fs-c02" | "fs-c03",
-              locale,
-              "title",
-            ),
+          : extraCaseCopy(definition.id as ExtraCaseId, locale, "title"),
       subtitle:
         definition.id === "fs-c01"
           ? caseCopy(locale, "subtitle")
-          : extraCaseCopy(
-              definition.id as "fs-c02" | "fs-c03",
-              locale,
-              "subtitle",
-            ),
+          : extraCaseCopy(definition.id as ExtraCaseId, locale, "subtitle"),
     }),
   );
 }

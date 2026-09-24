@@ -1066,6 +1066,47 @@ pre {
   border-inline-start: 3px solid var(--orange);
 }
 
+.delivery-timeline {
+  background: #f6f7f2;
+}
+
+.repeat-safe-control pre {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+
+.delivery-timeline-row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.delivery-timeline-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.delivery-effect {
+  color: var(--teal-dark);
+}
+
+.delivery-timeline-note {
+  margin: 14px 0 0;
+  padding-inline-start: 12px;
+  border-inline-start: 3px solid var(--orange);
+}
+
+@media (max-width: 560px) {
+  .delivery-timeline-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
 .case-recap {
   padding-inline-start: 22px;
 }
