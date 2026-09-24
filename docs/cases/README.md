@@ -1,6 +1,6 @@
 # Case model
 
-A FaultScope Case is an authored lesson about one correctness decision under failure. Seven Cases are published:
+A FaultScope Case is an authored lesson about one correctness decision under failure. Eight Cases are published:
 
 | Case | Primary question | Reasoning dimension |
 | --- | --- | --- |
