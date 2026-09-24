@@ -12,8 +12,9 @@ saves `faultscope.v1.codeLens` in the browser.
 
 Source files live in `examples/<language>/`. Build tooling extracts regions
 identified by [semantic anchors](semantic-anchors.md) into the static web
-bundle. Each lens has three behavioral fixtures for the weak repeat, `P → P`
-strong-contract repeat, and `P → Q` scope boundary. These fixtures support
+bundle. Case 01 has three behavioral fixtures in every lens: the weak repeat,
+`P → P` strong-contract repeat, and `P → Q` scope boundary. Cases 02–08 each
+have fixtures for their distinct correctness decision. These fixtures support
 the teaching claim but do not turn a synthetic model into a production SDK.
 
 See [contributing](contributing.md) for source markers and focused checks,

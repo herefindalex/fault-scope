@@ -1,6 +1,6 @@
 # Release process
 
-Builds currently label artifacts `0.0.1-preview`. Three canonical Cases are published, but the repository has no automated public release pipeline yet. Do not label a preview artifact `v0.1.0` until release review and packaging are complete.
+Builds currently label artifacts `0.0.1-preview`. Eight canonical Cases are published, but the repository has no automated public release pipeline yet. Do not label a preview artifact `v0.1.0` until release review and packaging are complete.
 
 For a preview candidate, start from a reviewed clean commit. Run `go run ./tools check --all`, `go run ./tools build`, `go run ./tools smoke`, and the browser E2E suite. Inspect `/api/version` and the embedded `faultscope-build.json`: version, commit, dirty state, content hash, Case IDs, and Code Lens IDs. The executable and embedded manifest must agree; startup rejects a mismatch.
 

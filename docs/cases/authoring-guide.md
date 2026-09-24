@@ -12,7 +12,7 @@ Provide a positive control showing valid progress, a scope challenge showing whe
 
 Add canonical metadata in `web/src/case-<number>-data.json` and register it in `web/src/cases.ts`. Metadata remains locale-neutral. Add the English catalog and all supported public Human Locale catalogs in `web/content/cases/<case-id>/locales/`. Register the new Case in `tools/catalogs.go`; the generator writes the frontend's combined catalog map, avoiding a hand-maintained import per locale. Translations change wording, never Case identity or reasoning state. Mark unreviewed translations beta under the [quality policy](../localization/quality-policy.md).
 
-Implement the Case-specific Guided reasoning, Challenge question, Deep Dive, rail values, and visual in a Case content module. Reuse `CaseShell` and `useCaseProgress` for mode tabs, navigation, Evidence / Contract / Property layout, and per-Case persistence. The shared shell must not infer retry, authority, or durability semantics. Cases 02 and 03 currently share a component for their presentation, but their Authority Timeline and Durability Domains remain separate visuals. Adding a fourth Case is **not** a content-only operation.
+Implement the Case-specific Guided reasoning, Challenge question, Deep Dive, rail values, and visual in a Case content module. Reuse `CaseShell` and `useCaseProgress` for mode tabs, navigation, Evidence / Contract / Property layout, and per-Case persistence. The shared shell must not infer retry, authority, or durability semantics. Cases 02 and 03 currently share a component for their presentation, but their Authority Timeline and Durability Domains remain separate visuals. Adding another Case is **not** a content-only operation.
 
 ## 3. Add Code Lens representations
 

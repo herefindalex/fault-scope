@@ -2,7 +2,7 @@
 
 FaultScope has a build-time frontend and one production runtime. The web app
 is Next.js App Router with React and static export. MDX is configured as a
-build-time option; current Case 01 prose uses JSON locale catalogs. Source
+build-time option; published Case prose uses JSON locale catalogs. Source
 examples in `examples/` are extracted by semantic anchor.
 
 ```mermaid
