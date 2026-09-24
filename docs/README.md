@@ -1,8 +1,8 @@
 # FaultScope documentation
 
-Engineering documentation is written in English. The [Traditional Chinese
-overview](../README.zh-TW.md) is a separate, manually maintained entry point.
-Product locale coverage is described in the Human Locale section below.
+Engineering documentation is written in English. The [project README](../README.md)
+links to overviews in all 20 supported Human Locales. Product locale coverage
+is described in the Human Locale section below.
 
 ## Getting started
 
