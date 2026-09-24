@@ -53,4 +53,12 @@ test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
   await expect(
     page.getByRole("heading", { name: "到底哪個事件比較新？" }),
   ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/the-read-succeeded-is-it-fresh-enough/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "讀取成功了，但資料夠新嗎？" }),
+  ).toBeVisible();
 });

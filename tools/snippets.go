@@ -22,20 +22,20 @@ var sourcePaths = map[string]string{
 }
 
 var additionalSourcePaths = map[string][]string{
-	"go":         {"examples/go/case02.go", "examples/go/case03.go", "examples/go/case04.go", "examples/go/case05.go"},
-	"typescript": {"examples/typescript/case02.ts", "examples/typescript/case03.ts", "examples/typescript/case04.ts", "examples/typescript/case05.ts"},
-	"python":     {"examples/python/case02.py", "examples/python/case03.py", "examples/python/case04.py", "examples/python/case05.py"},
-	"java":       {"examples/java/Case02.java", "examples/java/Case03.java", "examples/java/Case04.java", "examples/java/Case05.java"},
-	"php":        {"examples/php/Case02.php", "examples/php/Case03.php", "examples/php/Case04.php", "examples/php/Case05.php"},
-	"c":          {"examples/c/case02.c", "examples/c/case03.c", "examples/c/case04.c", "examples/c/case05.c"},
-	"cpp":        {"examples/cpp/case02.cpp", "examples/cpp/case03.cpp", "examples/cpp/case04.cpp", "examples/cpp/case05.cpp"},
+	"go":         {"examples/go/case02.go", "examples/go/case03.go", "examples/go/case04.go", "examples/go/case05.go", "examples/go/case06.go"},
+	"typescript": {"examples/typescript/case02.ts", "examples/typescript/case03.ts", "examples/typescript/case04.ts", "examples/typescript/case05.ts", "examples/typescript/case06.ts"},
+	"python":     {"examples/python/case02.py", "examples/python/case03.py", "examples/python/case04.py", "examples/python/case05.py", "examples/python/case06.py"},
+	"java":       {"examples/java/Case02.java", "examples/java/Case03.java", "examples/java/Case04.java", "examples/java/Case05.java", "examples/java/Case06.java"},
+	"php":        {"examples/php/Case02.php", "examples/php/Case03.php", "examples/php/Case04.php", "examples/php/Case05.php", "examples/php/Case06.php"},
+	"c":          {"examples/c/case02.c", "examples/c/case03.c", "examples/c/case04.c", "examples/c/case05.c", "examples/c/case06.c"},
+	"cpp":        {"examples/cpp/case02.cpp", "examples/cpp/case03.cpp", "examples/cpp/case04.cpp", "examples/cpp/case05.cpp", "examples/cpp/case06.cpp"},
 }
 
 type registry map[string]map[string]string
 
 func allAnchors() []string {
 	var result []string
-	for _, id := range []string{"fs-c01", "fs-c02", "fs-c03", "fs-c04", "fs-c05"} {
+	for _, id := range []string{"fs-c01", "fs-c02", "fs-c03", "fs-c04", "fs-c05", "fs-c06"} {
 		result = append(result, requiredCaseAnchors[id]...)
 	}
 	return result

@@ -9,6 +9,7 @@ import case02 from "../../../../src/case-02-data.json";
 import case03 from "../../../../src/case-03-data.json";
 import case04 from "../../../../src/case-04-data.json";
 import case05 from "../../../../src/case-05-data.json";
+import case06 from "../../../../src/case-06-data.json";
 import {
   languageIds,
   languageNames,
@@ -84,6 +85,12 @@ export default async function LanguagePage({ params }: Props) {
             slug: case05.slug,
             anchor: "fs-c05.apply-on-arrival" as const,
             label: "anchor.apply-on-arrival",
+          },
+          {
+            id: "fs-c06" as const,
+            slug: case06.slug,
+            anchor: "fs-c06.read-current-projection" as const,
+            label: "anchor.read-current-projection",
           },
         ].map((entry) => (
           <section key={entry.id} className="language-case-card">
