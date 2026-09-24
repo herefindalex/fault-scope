@@ -1,0 +1,73 @@
+{
+  "id": "fs-c07",
+  "slug": "did-cancellation-stop-the-work",
+  "status": "published",
+  "guided_entry": "review",
+  "challenge_entry": "still-blocked",
+  "steps": [
+    "review",
+    "precheck-passes",
+    "process-completes",
+    "send-starts",
+    "no-receiver",
+    "send-blocks",
+    "cancel-requested",
+    "signal-question",
+    "still-blocked",
+    "property",
+    "aware-wait",
+    "replay",
+    "cancel-releases",
+    "receiver-ready",
+    "bounded-local",
+    "cpu-bound",
+    "downstream",
+    "no-rollback",
+    "remaining",
+    "transfer",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.signalOnly", "option.forcedStop", "option.rollback"]
+  },
+  "visual_states": [
+    "precheck",
+    "processed",
+    "send-started",
+    "no-receiver",
+    "blocked",
+    "cancel-signalled",
+    "still-blocked",
+    "cancellable-wait",
+    "released",
+    "delivered",
+    "bounded-work",
+    "cpu-running",
+    "downstream-running",
+    "completed-effect"
+  ],
+  "required_visual_states": [
+    "blocked",
+    "cancel-signalled",
+    "still-blocked",
+    "cancellable-wait",
+    "released",
+    "delivered"
+  ],
+  "semantic_anchors": [
+    "fs-c07.precheck-then-block",
+    "fs-c07.blocking-send-without-cancel",
+    "fs-c07.blocking-send-with-cancel",
+    "fs-c07.long-work-check-cancel",
+    "fs-c07.downstream-without-cancellation"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": [
+    "property",
+    "counterexample",
+    "positive-control",
+    "scope-challenge",
+    "remaining",
+    "transfer"
+  ]
+}

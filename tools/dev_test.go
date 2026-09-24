@@ -34,6 +34,7 @@ func TestDeveloperOptions(t *testing.T) {
 		{"fs-c04", "consumer-finished-why-run-again"},
 		{"fs-c05", "which-event-is-actually-newer"},
 		{"fs-c06", "the-read-succeeded-is-it-fresh-enough"},
+		{"fs-c07", "did-cancellation-stop-the-work"},
 		{"consumer-finished-why-run-again", "consumer-finished-why-run-again"},
 	} {
 		options, err := parseDevOptions([]string{"--case", entry.selector, "--mode", "guided"})

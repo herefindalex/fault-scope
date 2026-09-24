@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseExperience } from "../../../../components/CaseExperience";
+import { CancellationCaseExperience } from "../../../../components/CancellationCaseExperience";
 import { DeliveryCaseExperience } from "../../../../components/DeliveryCaseExperience";
 import { FreshnessCaseExperience } from "../../../../components/FreshnessCaseExperience";
 import { LaterCaseExperience } from "../../../../components/LaterCaseExperience";
@@ -47,5 +48,6 @@ export default async function CasePage({ params }: Props) {
   if (selected.id === "fs-c04") return <DeliveryCaseExperience />;
   if (selected.id === "fs-c05") return <OrderingCaseExperience />;
   if (selected.id === "fs-c06") return <FreshnessCaseExperience />;
+  if (selected.id === "fs-c07") return <CancellationCaseExperience />;
   return <LaterCaseExperience caseId={selected.id as "fs-c02" | "fs-c03"} />;
 }
