@@ -1,5 +1,10 @@
 # FaultScope
 
+[English](README.md) · [繁體中文](README.zh-TW.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Português (Brasil)](README.pt-BR.md) · [Italiano](README.it.md) ·
+[Nederlands](README.nl.md) · [Polski](README.pl.md) · [Türkçe](README.tr.md) · [Українська](README.uk.md) · [Русский](README.ru.md) ·
+[العربية](README.ar.md) · [हिन्दी](README.hi.md) · [Tiếng Việt](README.vi.md) · [ไทย](README.th.md) · [Bahasa Indonesia](README.id.md)
+
 **Interactive learning lab for distributed application correctness.**
 
 FaultScope helps engineers reason from evidence, contracts, properties, authority, durability, and failure boundaries. Each Case asks what a system actually guarantees before naming a repair pattern.
@@ -44,6 +49,5 @@ Start at the [documentation index](docs/README.md), or choose a path:
 - [Frontend and Go contributors](docs/development/getting-started.md)
 - [Architecture](docs/architecture/overview.md)
 - [Contributing guide](CONTRIBUTING.md)
-- [繁體中文概覽](README.zh-TW.md)
 
 FaultScope is licensed under the [MIT License](LICENSE).
