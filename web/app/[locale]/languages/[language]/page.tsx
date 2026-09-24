@@ -8,6 +8,7 @@ import { localizedMetadata } from "../../../../i18n/metadata";
 import case02 from "../../../../src/case-02-data.json";
 import case03 from "../../../../src/case-03-data.json";
 import case04 from "../../../../src/case-04-data.json";
+import case05 from "../../../../src/case-05-data.json";
 import {
   languageIds,
   languageNames,
@@ -77,6 +78,12 @@ export default async function LanguagePage({ params }: Props) {
             slug: case04.slug,
             anchor: "fs-c04.effect-then-ack" as const,
             label: "anchor.effect-then-ack",
+          },
+          {
+            id: "fs-c05" as const,
+            slug: case05.slug,
+            anchor: "fs-c05.apply-on-arrival" as const,
+            label: "anchor.apply-on-arrival",
           },
         ].map((entry) => (
           <section key={entry.id} className="language-case-card">

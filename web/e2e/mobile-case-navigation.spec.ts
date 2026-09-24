@@ -45,4 +45,12 @@ test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
       name: "消費端明明處理完了，為什麼又執行一次？",
     }),
   ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/which-event-is-actually-newer/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "到底哪個事件比較新？" }),
+  ).toBeVisible();
 });

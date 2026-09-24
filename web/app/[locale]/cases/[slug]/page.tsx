@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CaseExperience } from "../../../../components/CaseExperience";
 import { DeliveryCaseExperience } from "../../../../components/DeliveryCaseExperience";
 import { LaterCaseExperience } from "../../../../components/LaterCaseExperience";
+import { OrderingCaseExperience } from "../../../../components/OrderingCaseExperience";
 import { caseCopy } from "../../../../i18n/catalog";
 import { extraCaseCopy, type ExtraCaseId } from "../../../../i18n/extra-cases";
 import { isLocale } from "../../../../i18n/locale";
@@ -43,5 +44,6 @@ export default async function CasePage({ params }: Props) {
   if (!selected || !publishedRoutes.includes(selected)) notFound();
   if (selected.id === "fs-c01") return <CaseExperience />;
   if (selected.id === "fs-c04") return <DeliveryCaseExperience />;
+  if (selected.id === "fs-c05") return <OrderingCaseExperience />;
   return <LaterCaseExperience caseId={selected.id as "fs-c02" | "fs-c03"} />;
 }

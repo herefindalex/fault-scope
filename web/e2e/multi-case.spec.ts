@@ -16,6 +16,7 @@ const cases = [
   readJson<CaseDefinition>("../src/case-02-data.json"),
   readJson<CaseDefinition>("../src/case-03-data.json"),
   readJson<CaseDefinition>("../src/case-04-data.json"),
+  readJson<CaseDefinition>("../src/case-05-data.json"),
 ];
 const englishUI = readJson<Record<string, string>>("../i18n/messages/en.json");
 
@@ -85,7 +86,8 @@ for (const definition of cases) {
         catalog.messages["takeaway"],
       );
       for (const section of definition.id === "fs-c03" ||
-      definition.id === "fs-c04"
+      definition.id === "fs-c04" ||
+      definition.id === "fs-c05"
         ? [1, 2, 3, 4, 5]
         : [1, 2, 3, 4]) {
         await expect(page.locator(".deep-dive")).toContainText(
@@ -188,7 +190,9 @@ test("each case uses its own visual and all seven Code Lenses", async ({
           ? ".authority-timeline"
           : definition.id === "fs-c03"
             ? ".durability-domains"
-            : ".delivery-timeline",
+            : definition.id === "fs-c04"
+              ? ".delivery-timeline"
+              : ".source-arrival-visual",
       ),
     ).toBeVisible();
     for (const language of [
@@ -265,4 +269,64 @@ test("FS-C04 shows the repeated effect and the atomic repair", async ({
     "SetShipmentState(S, READY)",
   );
   await expect(page.locator(".delivery-timeline")).toHaveCount(0);
+});
+
+test("FS-C05 separates source order from arrival order and rejects regression", async ({
+  page,
+}) => {
+  const case05 = cases.find((definition) => definition.id === "fs-c05")!;
+  const catalog = readJson<CaseCatalog>(
+    "../content/cases/fs-c05/locales/en.json",
+  );
+  await page.goto(`/en/cases/${case05.slug}/?mode=guided&lang=go`);
+  const next = page.getByRole("button", { name: englishUI["action.next"] });
+  await next.click();
+  await expect(page.locator(".source-arrival-visual")).toContainText(
+    catalog.messages["visual.sourceEvents"],
+  );
+  await next.click();
+  await expect(page.locator(".source-arrival-visual")).toContainText(
+    catalog.messages["visual.arrivalEvents"],
+  );
+  for (let index = 2; index < 6; index++) await next.click();
+  await expect(page.locator(".source-arrival-visual")).toHaveAttribute(
+    "data-state",
+    "regressed42",
+  );
+  for (let index = 6; index < 11; index++) await next.click();
+  await expect(page.locator(".source-arrival-visual")).toHaveAttribute(
+    "data-state",
+    "rejected42",
+  );
+  await expect(page.locator(".source-arrival-visual")).toContainText(
+    catalog.messages["visual.rejected42"],
+  );
+  await next.click();
+  await expect(page.locator(".source-arrival-visual")).toHaveAttribute(
+    "data-state",
+    "advanced44",
+  );
+  await expect(page.locator(".source-arrival-visual")).toContainText("E44");
+  await next.click();
+  await expect(page.locator(".source-arrival-visual")).toHaveAttribute(
+    "data-state",
+    "duplicate43",
+  );
+  await expect(page.locator(".source-arrival-visual")).toContainText(
+    "E43 → E43",
+  );
+  await page.reload();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.duplicate.title"],
+  );
+  await next.click();
+  await next.click();
+  await expect(page.locator(".source-arrival-visual")).toHaveAttribute(
+    "data-state",
+    "lagging43",
+  );
+  await expect(page.locator(".source-arrival-visual")).toContainText("E50");
+  await expect(page.locator(".source-arrival-visual")).toContainText(
+    catalog.messages["visual.applied43"],
+  );
 });

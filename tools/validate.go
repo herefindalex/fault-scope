@@ -26,6 +26,7 @@ var caseMetadataPaths = []string{
 	"web/src/case-02-data.json",
 	"web/src/case-03-data.json",
 	"web/src/case-04-data.json",
+	"web/src/case-05-data.json",
 }
 
 var canonicalSlugs = map[string]string{
@@ -33,6 +34,7 @@ var canonicalSlugs = map[string]string{
 	"fs-c02": "can-the-old-worker-still-commit",
 	"fs-c03": "database-committed-where-is-event",
 	"fs-c04": "consumer-finished-why-run-again",
+	"fs-c05": "which-event-is-actually-newer",
 }
 
 var requiredCaseAnchors = map[string][]string{
@@ -61,6 +63,12 @@ var requiredCaseAnchors = map[string][]string{
 		"fs-c04.apply-event-once",
 		"fs-c04.redelivery-no-repeat",
 		"fs-c04.separate-dedupe-record",
+	},
+	"fs-c05": {
+		"fs-c05.apply-on-arrival",
+		"fs-c05.apply-if-newer",
+		"fs-c05.reject-stale-revision",
+		"fs-c05.accept-newer-revision",
 	},
 }
 

@@ -25,6 +25,7 @@ var devCaseSlugs = map[string]string{
 	"fs-c02": "can-the-old-worker-still-commit",
 	"fs-c03": "database-committed-where-is-event",
 	"fs-c04": "consumer-finished-why-run-again",
+	"fs-c05": "which-event-is-actually-newer",
 }
 
 func devCaseSlug(value string) (string, bool) {
