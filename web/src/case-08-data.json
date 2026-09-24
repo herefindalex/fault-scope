@@ -1,0 +1,66 @@
+{
+  "id": "fs-c08",
+  "slug": "it-restarted-what-did-it-forget",
+  "status": "published",
+  "guided_entry": "revision-44",
+  "challenge_entry": "guard-disappears",
+  "steps": [
+    "revision-44",
+    "durable-value",
+    "memory-guard",
+    "reject-before",
+    "crash",
+    "restart",
+    "value-survives",
+    "guard-disappears",
+    "stale-arrives",
+    "weak-accepts",
+    "property",
+    "atomic-record",
+    "restart-again",
+    "recover-44",
+    "reject-after",
+    "accept-45",
+    "cache-control",
+    "replay-alternative",
+    "checkpoint-mismatch",
+    "schema-compatibility",
+    "remaining",
+    "transfer",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.valueOnly", "option.recoveredRevision", "option.waitForTimer"]
+  },
+  "visual_states": [
+    "before",
+    "rejected-before",
+    "crashed",
+    "weak-restart",
+    "regressed",
+    "atomic-record",
+    "strong-restart",
+    "rejected-after",
+    "accepted-next",
+    "rebuild-before-ready",
+    "checkpoint-mismatch"
+  ],
+  "required_visual_states": [
+    "before",
+    "weak-restart",
+    "regressed",
+    "atomic-record",
+    "strong-restart",
+    "rejected-after",
+    "accepted-next"
+  ],
+  "semantic_anchors": [
+    "fs-c08.memory-only-revision",
+    "fs-c08.persist-state-with-revision",
+    "fs-c08.recover-state-with-revision",
+    "fs-c08.reject-stale-after-restart",
+    "fs-c08.rebuild-before-ready"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": ["property", "counterexample", "positive-control", "scope-challenge", "remaining", "transfer"]
+}

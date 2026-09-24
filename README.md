@@ -13,6 +13,7 @@ FaultScope helps engineers reason from evidence, contracts, properties, authorit
 5. [Which Event Is Actually Newer?](docs/cases/fs-c05.md) — Shipment events arrive out of source order. Use the source-defined per-shipment revision to prevent projection regression.
 6. [The Read Succeeded. Is It Fresh Enough?](docs/cases/fs-c06.md) — A verification read may return an older projection after a successful write. Carry the committed revision as the read’s minimum.
 7. [Did Cancellation Stop the Work?](docs/cases/fs-c07.md) — A producer can stay blocked on result handoff after cancellation. Make that blocking operation observe the signal.
+8. [It Restarted. What Did It Forget?](docs/cases/fs-c08.md) — A durable business value survives a crash while its revision guard disappears. Recover both before accepting events.
 
 Each Case has **Guided**, **Challenge**, and **Deep Dive** modes, a Case-specific visual, an Evidence / Contract / Property rail, a positive control, a remaining failure surface, and seven Code Lenses. Progress is stored per Case in the browser.
 
@@ -27,9 +28,9 @@ Open [http://localhost:8080/](http://localhost:8080/). The default `:8080` binds
 
 ## Current status
 
-This is a **`0.0.x` preview** with seven published Cases. The VM, Job Store, order, broker, and rewards examples are synthetic teaching models, not production SDK clients or infrastructure.
+This is a **`0.0.x` preview** with eight published Cases. The VM, Job Store, order, broker, and rewards examples are synthetic teaching models, not production SDK clients or infrastructure.
 
-All 20 Human Locales have complete UI and Case 01–07 message catalogs. The 19 non-English catalogs are **unreviewed beta translations**. Human Locale changes the explanation and layout; Code Lens changes the source representation. They are independent: for example, 繁體中文 + Go or العربية + C. The seven Code Lenses are **Go, TypeScript, Python, Java, PHP, C, and C++**.
+All 20 Human Locales have complete UI and Case 01–08 message catalogs. The 19 non-English catalogs are **unreviewed beta translations**. Human Locale changes the explanation and layout; Code Lens changes the source representation. They are independent: for example, 繁體中文 + Go or العربية + C. The seven Code Lenses are **Go, TypeScript, Python, Java, PHP, C, and C++**.
 
 The Next.js/React frontend is statically exported and embedded in one Go executable. Production needs no Node server, database, content directory, or translation service. Learner progress and preferences live only in the browser.
 

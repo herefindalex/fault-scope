@@ -13,7 +13,7 @@ go run ./tools build
 
 開啟 [http://localhost:8080/](http://localhost:8080/)。預設 `:8080` 監聽所有網路介面；可用 `--listen` 或 `FAULTSCOPE_LISTEN` 指定地址，旗標優先。
 
-**人類語言（Human Locale）**改變介面與說明；**程式碼視角（Code Lens）**改變程式碼呈現，兩者互不影響。例如可以選擇繁體中文說明搭配 Go 程式碼。20 個人類語言的介面與案例 01–07 訊息均已補齊；其中 19 個非英語語言仍是**未經人工審校的 beta 翻譯**。程式碼視角有 Go、TypeScript、Python、Java、PHP、C、C++。
+**人類語言（Human Locale）**改變介面與說明；**程式碼視角（Code Lens）**改變程式碼呈現，兩者互不影響。例如可以選擇繁體中文說明搭配 Go 程式碼。20 個人類語言的介面與案例 01–08 訊息均已補齊；其中 19 個非英語語言仍是**未經人工審校的 beta 翻譯**。程式碼視角有 Go、TypeScript、Python、Java、PHP、C、C++。
 
 正式執行只需一個 Go 執行檔；Next.js/React 用於建置靜態前端，不需要正式環境的 Node 伺服器、資料庫或翻譯服務。
 

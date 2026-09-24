@@ -6,6 +6,7 @@ import { DeliveryCaseExperience } from "../../../../components/DeliveryCaseExper
 import { FreshnessCaseExperience } from "../../../../components/FreshnessCaseExperience";
 import { LaterCaseExperience } from "../../../../components/LaterCaseExperience";
 import { OrderingCaseExperience } from "../../../../components/OrderingCaseExperience";
+import { RecoveryCaseExperience } from "../../../../components/RecoveryCaseExperience";
 import { caseCopy } from "../../../../i18n/catalog";
 import { extraCaseCopy, type ExtraCaseId } from "../../../../i18n/extra-cases";
 import { isLocale } from "../../../../i18n/locale";
@@ -49,5 +50,6 @@ export default async function CasePage({ params }: Props) {
   if (selected.id === "fs-c05") return <OrderingCaseExperience />;
   if (selected.id === "fs-c06") return <FreshnessCaseExperience />;
   if (selected.id === "fs-c07") return <CancellationCaseExperience />;
+  if (selected.id === "fs-c08") return <RecoveryCaseExperience />;
   return <LaterCaseExperience caseId={selected.id as "fs-c02" | "fs-c03"} />;
 }

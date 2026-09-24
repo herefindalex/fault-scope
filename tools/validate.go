@@ -29,6 +29,7 @@ var caseMetadataPaths = []string{
 	"web/src/case-05-data.json",
 	"web/src/case-06-data.json",
 	"web/src/case-07-data.json",
+	"web/src/case-08-data.json",
 }
 
 var canonicalSlugs = map[string]string{
@@ -39,6 +40,7 @@ var canonicalSlugs = map[string]string{
 	"fs-c05": "which-event-is-actually-newer",
 	"fs-c06": "the-read-succeeded-is-it-fresh-enough",
 	"fs-c07": "did-cancellation-stop-the-work",
+	"fs-c08": "it-restarted-what-did-it-forget",
 }
 
 var requiredCaseAnchors = map[string][]string{
@@ -87,6 +89,13 @@ var requiredCaseAnchors = map[string][]string{
 		"fs-c07.blocking-send-with-cancel",
 		"fs-c07.long-work-check-cancel",
 		"fs-c07.downstream-without-cancellation",
+	},
+	"fs-c08": {
+		"fs-c08.memory-only-revision",
+		"fs-c08.persist-state-with-revision",
+		"fs-c08.recover-state-with-revision",
+		"fs-c08.reject-stale-after-restart",
+		"fs-c08.rebuild-before-ready",
 	},
 }
 

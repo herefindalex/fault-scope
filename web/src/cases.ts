@@ -5,6 +5,7 @@ import case04 from "./case-04-data.json";
 import case05 from "./case-05-data.json";
 import case06 from "./case-06-data.json";
 import case07 from "./case-07-data.json";
+import case08 from "./case-08-data.json";
 
 export const caseDefinitions = [
   case01,
@@ -14,6 +15,7 @@ export const caseDefinitions = [
   case05,
   case06,
   case07,
+  case08,
 ];
 export type CaseId =
   | "fs-c01"
@@ -22,7 +24,8 @@ export type CaseId =
   | "fs-c04"
   | "fs-c05"
   | "fs-c06"
-  | "fs-c07";
+  | "fs-c07"
+  | "fs-c08";
 export type CaseDefinition = (typeof caseDefinitions)[number];
 
 export function getCaseById(id: string): CaseDefinition | undefined {
