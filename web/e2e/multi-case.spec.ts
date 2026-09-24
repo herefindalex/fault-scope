@@ -18,6 +18,7 @@ const cases = [
   readJson<CaseDefinition>("../src/case-04-data.json"),
   readJson<CaseDefinition>("../src/case-05-data.json"),
   readJson<CaseDefinition>("../src/case-06-data.json"),
+  readJson<CaseDefinition>("../src/case-07-data.json"),
 ];
 const englishUI = readJson<Record<string, string>>("../i18n/messages/en.json");
 
@@ -89,7 +90,8 @@ for (const definition of cases) {
       for (const section of definition.id === "fs-c03" ||
       definition.id === "fs-c04" ||
       definition.id === "fs-c05" ||
-      definition.id === "fs-c06"
+      definition.id === "fs-c06" ||
+      definition.id === "fs-c07"
         ? [1, 2, 3, 4, 5]
         : [1, 2, 3, 4]) {
         await expect(page.locator(".deep-dive")).toContainText(
@@ -196,7 +198,9 @@ test("each case uses its own visual and all seven Code Lenses", async ({
               ? ".delivery-timeline"
               : definition.id === "fs-c05"
                 ? ".source-arrival-visual"
-                : ".revision-gap-visual",
+                : definition.id === "fs-c06"
+                  ? ".revision-gap-visual"
+                  : ".cancel-path-visual",
       ),
     ).toBeVisible();
     for (const language of [
@@ -381,5 +385,53 @@ test("FS-C06 enforces a requested minimum rather than HTTP or exact value", asyn
   await page.reload();
   await expect(page.locator(".lesson-panel h2")).toHaveText(
     catalog.messages["step.remaining.title"],
+  );
+});
+
+test("FS-C07 shows cancellation missing and then joining the blocked handoff", async ({
+  page,
+}) => {
+  const case07 = cases.find((definition) => definition.id === "fs-c07")!;
+  const catalog = readJson<CaseCatalog>(
+    "../content/cases/fs-c07/locales/en.json",
+  );
+  await page.goto(`/en/cases/${case07.slug}/?mode=guided&lang=go`);
+  const next = page.getByRole("button", { name: englishUI["action.next"] });
+  for (let index = 0; index < 5; index++) await next.click();
+  await expect(page.locator(".cancel-path-visual")).toHaveAttribute(
+    "data-state",
+    "blocked",
+  );
+  await expect(page.locator(".cancel-path-visual")).toContainText(
+    catalog.messages["visual.weakBoundary"],
+  );
+  for (let index = 5; index < 8; index++) await next.click();
+  await expect(page.locator(".cancel-path-visual")).toHaveAttribute(
+    "data-state",
+    "still-blocked",
+  );
+  await expect(page.locator(".cancel-path-visual")).toContainText(
+    catalog.messages["visual.producerTrapped"],
+  );
+  for (let index = 8; index < 12; index++) await next.click();
+  await expect(page.locator(".cancel-path-visual")).toHaveAttribute(
+    "data-state",
+    "released",
+  );
+  await expect(page.locator(".cancel-path-visual")).toContainText(
+    catalog.messages["visual.strongBoundary"],
+  );
+  await next.click();
+  await expect(page.locator(".cancel-path-visual")).toHaveAttribute(
+    "data-state",
+    "delivered",
+  );
+  for (let index = 13; index < 17; index++) await next.click();
+  await expect(page.locator(".cancel-path-visual")).toContainText(
+    catalog.messages["visual.cancelLate"],
+  );
+  await page.reload();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.no-rollback.title"],
   );
 });

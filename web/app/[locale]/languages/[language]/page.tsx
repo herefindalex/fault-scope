@@ -10,6 +10,7 @@ import case03 from "../../../../src/case-03-data.json";
 import case04 from "../../../../src/case-04-data.json";
 import case05 from "../../../../src/case-05-data.json";
 import case06 from "../../../../src/case-06-data.json";
+import case07 from "../../../../src/case-07-data.json";
 import {
   languageIds,
   languageNames,
@@ -91,6 +92,12 @@ export default async function LanguagePage({ params }: Props) {
             slug: case06.slug,
             anchor: "fs-c06.read-current-projection" as const,
             label: "anchor.read-current-projection",
+          },
+          {
+            id: "fs-c07" as const,
+            slug: case07.slug,
+            anchor: "fs-c07.precheck-then-block" as const,
+            label: "anchor.precheck-then-block",
           },
         ].map((entry) => (
           <section key={entry.id} className="language-case-card">

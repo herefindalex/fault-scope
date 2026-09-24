@@ -28,6 +28,7 @@ var caseMetadataPaths = []string{
 	"web/src/case-04-data.json",
 	"web/src/case-05-data.json",
 	"web/src/case-06-data.json",
+	"web/src/case-07-data.json",
 }
 
 var canonicalSlugs = map[string]string{
@@ -37,6 +38,7 @@ var canonicalSlugs = map[string]string{
 	"fs-c04": "consumer-finished-why-run-again",
 	"fs-c05": "which-event-is-actually-newer",
 	"fs-c06": "the-read-succeeded-is-it-fresh-enough",
+	"fs-c07": "did-cancellation-stop-the-work",
 }
 
 var requiredCaseAnchors = map[string][]string{
@@ -78,6 +80,13 @@ var requiredCaseAnchors = map[string][]string{
 		"fs-c06.read-at-least-revision",
 		"fs-c06.reject-insufficient-revision",
 		"fs-c06.serve-fresh-enough-projection",
+	},
+	"fs-c07": {
+		"fs-c07.precheck-then-block",
+		"fs-c07.blocking-send-without-cancel",
+		"fs-c07.blocking-send-with-cancel",
+		"fs-c07.long-work-check-cancel",
+		"fs-c07.downstream-without-cancellation",
 	},
 }
 

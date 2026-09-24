@@ -2,7 +2,7 @@
 
 FaultScope is an interactive lab for engineers who need to reason about distributed application correctness. Ordinary-looking code can be unsafe when the completion response, current authority, or durable publication obligation is unclear. A pattern name alone does not decide whether a specific contract preserves a property.
 
-Six [authored Cases](../cases/README.md) are published:
+Seven [authored Cases](../cases/README.md) are published:
 
 - [Case 01](../cases/fs-c01.md): an ambiguous `CreateVM` response and the identity of a retry.
 - [Case 02](../cases/fs-c02.md): a stale worker that may still execute after authority moved to another generation.
@@ -10,7 +10,8 @@ Six [authored Cases](../cases/README.md) are published:
 - [Case 04](../cases/fs-c04.md): a committed reward repeated when an event is redelivered without an atomic processed-event record.
 - [Case 05](../cases/fs-c05.md): source-defined per-entity revision keeps a projection from regressing when deliveries arrive out of order.
 - [Case 06](../cases/fs-c06.md): a minimum-revision read distinguishes HTTP success from freshness required by the caller.
+- [Case 07](../cases/fs-c07.md): cancellation must intersect the blocking handoff for request-scoped work to terminate.
 
 **Guided** reveals evidence and contracts step by step. **Challenge** asks for a decision with less guidance. **Deep Dive** examines the repair's limits. Each Case has its own browser-stored progress. The [Six Questions](six-questions.md) organize reasoning: what was established, what the contract allows, which property matters, where it is enforced, whether the counterexample remains, and what can still fail after repair.
 
-**Human Locale** changes prose and layout. **Code Lens** changes the displayed source artifact; the choices are independent. All 20 locales have complete UI and Case 01–06 catalogs. The 19 non-English locales are [unreviewed beta content](../localization/quality-policy.md). See [non-goals](non-goals.md) and [accessibility](accessibility.md).
+**Human Locale** changes prose and layout. **Code Lens** changes the displayed source artifact; the choices are independent. All 20 locales have complete UI and Case 01–07 catalogs. The 19 non-English locales are [unreviewed beta content](../localization/quality-policy.md). See [non-goals](non-goals.md) and [accessibility](accessibility.md).

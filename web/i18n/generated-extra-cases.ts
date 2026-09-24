@@ -99,6 +99,26 @@ import c4l16 from "../content/cases/fs-c06/locales/hi.json";
 import c4l17 from "../content/cases/fs-c06/locales/vi.json";
 import c4l18 from "../content/cases/fs-c06/locales/th.json";
 import c4l19 from "../content/cases/fs-c06/locales/id.json";
+import c5l0 from "../content/cases/fs-c07/locales/en.json";
+import c5l1 from "../content/cases/fs-c07/locales/zh-TW.json";
+import c5l2 from "../content/cases/fs-c07/locales/zh-CN.json";
+import c5l3 from "../content/cases/fs-c07/locales/ja.json";
+import c5l4 from "../content/cases/fs-c07/locales/ko.json";
+import c5l5 from "../content/cases/fs-c07/locales/es.json";
+import c5l6 from "../content/cases/fs-c07/locales/fr.json";
+import c5l7 from "../content/cases/fs-c07/locales/de.json";
+import c5l8 from "../content/cases/fs-c07/locales/pt-BR.json";
+import c5l9 from "../content/cases/fs-c07/locales/it.json";
+import c5l10 from "../content/cases/fs-c07/locales/nl.json";
+import c5l11 from "../content/cases/fs-c07/locales/pl.json";
+import c5l12 from "../content/cases/fs-c07/locales/tr.json";
+import c5l13 from "../content/cases/fs-c07/locales/uk.json";
+import c5l14 from "../content/cases/fs-c07/locales/ru.json";
+import c5l15 from "../content/cases/fs-c07/locales/ar.json";
+import c5l16 from "../content/cases/fs-c07/locales/hi.json";
+import c5l17 from "../content/cases/fs-c07/locales/vi.json";
+import c5l18 from "../content/cases/fs-c07/locales/th.json";
+import c5l19 from "../content/cases/fs-c07/locales/id.json";
 
 export const catalogs = {
   "fs-c02": {
@@ -210,5 +230,27 @@ export const catalogs = {
     vi: c4l17.messages,
     th: c4l18.messages,
     id: c4l19.messages,
+  },
+  "fs-c07": {
+    en: c5l0.messages,
+    "zh-TW": c5l1.messages,
+    "zh-CN": c5l2.messages,
+    ja: c5l3.messages,
+    ko: c5l4.messages,
+    es: c5l5.messages,
+    fr: c5l6.messages,
+    de: c5l7.messages,
+    "pt-BR": c5l8.messages,
+    it: c5l9.messages,
+    nl: c5l10.messages,
+    pl: c5l11.messages,
+    tr: c5l12.messages,
+    uk: c5l13.messages,
+    ru: c5l14.messages,
+    ar: c5l15.messages,
+    hi: c5l16.messages,
+    vi: c5l17.messages,
+    th: c5l18.messages,
+    id: c5l19.messages,
   },
 } as const;

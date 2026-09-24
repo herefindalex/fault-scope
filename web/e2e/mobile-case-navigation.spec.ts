@@ -61,4 +61,12 @@ test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
   await expect(
     page.getByRole("heading", { name: "讀取成功了，但資料夠新嗎？" }),
   ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/did-cancellation-stop-the-work/"]')
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "取消後，工作真的停了嗎？" }),
+  ).toBeVisible();
 });

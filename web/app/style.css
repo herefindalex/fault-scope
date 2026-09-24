@@ -1121,9 +1121,42 @@ pre {
   font-weight: 700;
 }
 
+.cancel-path-visual {
+  background: #f7f5f0;
+}
+
+.cancel-flow-row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+
+.cancel-flow-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cancel-intersection {
+  border-inline-start: 3px solid var(--orange);
+  padding-inline-start: 12px;
+}
+
+.cancel-path-visual[data-state="released"] .cancel-intersection,
+.cancel-path-visual[data-state="delivered"] .cancel-intersection {
+  border-inline-start-color: var(--teal);
+}
+
+.cancel-producer {
+  color: var(--teal-dark);
+  font-weight: 700;
+}
+
 @media (max-width: 640px) {
   .order-lane,
-  .revision-gap-row {
+  .revision-gap-row,
+  .cancel-flow-row {
     grid-template-columns: 1fr;
     gap: 5px;
   }
