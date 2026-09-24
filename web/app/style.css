@@ -1077,6 +1077,35 @@ pre {
   line-height: 1.8;
 }
 
+.source-arrival-visual {
+  background: #f3f6f9;
+}
+
+.order-lane {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+}
+
+.order-lane span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-projection {
+  color: var(--teal-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .order-lane {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
 .delivery-timeline-row {
   display: grid;
   grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr);

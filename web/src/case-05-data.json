@@ -1,0 +1,61 @@
+{
+  "id": "fs-c05",
+  "slug": "which-event-is-actually-newer",
+  "status": "published",
+  "guided_entry": "review",
+  "challenge_entry": "late-42",
+  "steps": [
+    "review",
+    "source-order",
+    "arrival-order",
+    "apply-43",
+    "late-42",
+    "arrival-assumption",
+    "regression",
+    "property",
+    "timestamp",
+    "source-contract",
+    "apply-43-strong",
+    "reject-42",
+    "forward-44",
+    "duplicate",
+    "entity-scope",
+    "remaining",
+    "transfer",
+    "recap"
+  ],
+  "questions": {
+    "challenge": ["option.sourceRevision", "option.arrival", "option.timestamp"]
+  },
+  "visual_states": [
+    "source-order",
+    "arrival-order",
+    "applied-43",
+    "regressed-42",
+    "stale-rejected",
+    "advanced-44",
+    "duplicate-ignored"
+  ],
+  "required_visual_states": [
+    "source-order",
+    "arrival-order",
+    "regressed-42",
+    "stale-rejected",
+    "advanced-44"
+  ],
+  "semantic_anchors": [
+    "fs-c05.apply-on-arrival",
+    "fs-c05.apply-if-newer",
+    "fs-c05.reject-stale-revision",
+    "fs-c05.accept-newer-revision"
+  ],
+  "code_lenses": ["go", "typescript", "python", "java", "php", "c", "cpp"],
+  "sections": [
+    "property",
+    "counterexample",
+    "positive-control",
+    "scope-challenge",
+    "remaining",
+    "transfer"
+  ]
+}
