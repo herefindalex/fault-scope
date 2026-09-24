@@ -6,7 +6,7 @@ test.use({
   hasTouch: true,
 });
 
-test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
+test("mobile navigation reaches Cases 02 through 08 from Case 01", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -69,4 +69,10 @@ test("mobile navigation reaches Cases 02 through 04 from Case 01", async ({
   await expect(
     page.getByRole("heading", { name: "取消後，工作真的停了嗎？" }),
   ).toBeVisible();
+
+  await casesLink.click();
+  await page
+    .locator('a[href="/zh-TW/cases/it-restarted-what-did-it-forget/"]')
+    .click();
+  await expect(page.locator(".recovery-visual")).toBeVisible();
 });

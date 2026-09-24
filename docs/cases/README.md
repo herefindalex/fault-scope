@@ -11,6 +11,7 @@ A FaultScope Case is an authored lesson about one correctness decision under fai
 | [FS-C05](fs-c05.md) | Which event is actually newer? | Source-defined ordering |
 | [FS-C06](fs-c06.md) | The read succeeded. Is it fresh enough? | Minimum-revision freshness |
 | [FS-C07](fs-c07.md) | Did cancellation stop the work? | Request lifecycle and blocking boundaries |
+| [FS-C08](fs-c08.md) | It restarted. What did it forget? | Recovery and correctness state |
 
 The [Case registry](../../web/src/cases.ts) holds stable identity and structural metadata. [CaseShell](../../web/components/CaseShell.tsx) and [useCaseProgress](../../web/components/useCaseProgress.ts) handle shared interaction and per-Case persistence. Each Case owns its failure model, reasoning, rail values, and visual. Code Lenses present the same semantics in seven programming languages; Human Locales change only the explanation and interface language. Neither changes the canonical Case state.
 

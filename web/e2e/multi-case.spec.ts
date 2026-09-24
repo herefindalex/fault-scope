@@ -19,6 +19,7 @@ const cases = [
   readJson<CaseDefinition>("../src/case-05-data.json"),
   readJson<CaseDefinition>("../src/case-06-data.json"),
   readJson<CaseDefinition>("../src/case-07-data.json"),
+  readJson<CaseDefinition>("../src/case-08-data.json"),
 ];
 const englishUI = readJson<Record<string, string>>("../i18n/messages/en.json");
 
@@ -91,7 +92,8 @@ for (const definition of cases) {
       definition.id === "fs-c04" ||
       definition.id === "fs-c05" ||
       definition.id === "fs-c06" ||
-      definition.id === "fs-c07"
+      definition.id === "fs-c07" ||
+      definition.id === "fs-c08"
         ? [1, 2, 3, 4, 5]
         : [1, 2, 3, 4]) {
         await expect(page.locator(".deep-dive")).toContainText(
@@ -200,7 +202,9 @@ test("each case uses its own visual and all seven Code Lenses", async ({
                 ? ".source-arrival-visual"
                 : definition.id === "fs-c06"
                   ? ".revision-gap-visual"
-                  : ".cancel-path-visual",
+                  : definition.id === "fs-c07"
+                    ? ".cancel-path-visual"
+                    : ".recovery-visual",
       ),
     ).toBeVisible();
     for (const language of [
@@ -433,5 +437,43 @@ test("FS-C07 shows cancellation missing and then joining the blocked handoff", a
   await page.reload();
   await expect(page.locator(".lesson-panel h2")).toHaveText(
     catalog.messages["step.no-rollback.title"],
+  );
+});
+
+test("FS-C08 loses the guard at restart then recovers a coherent revision", async ({
+  page,
+}) => {
+  const case08 = cases.find((definition) => definition.id === "fs-c08")!;
+  const catalog = readJson<CaseCatalog>(
+    "../content/cases/fs-c08/locales/en.json",
+  );
+  await page.goto(`/en/cases/${case08.slug}/?mode=guided&lang=go`);
+  const next = page.getByRole("button", { name: englishUI["action.next"] });
+  const visual = page.locator(".recovery-visual");
+  await expect(visual).toHaveAttribute("data-state", "before");
+  await expect(visual).toContainText(catalog.messages["visual.guard44"]);
+
+  for (let index = 0; index < 7; index++) await next.click();
+  await expect(visual).toHaveAttribute("data-state", "weak-restart");
+  await expect(visual).toContainText(catalog.messages["visual.guardEmpty"]);
+  for (let index = 7; index < 9; index++) await next.click();
+  await expect(visual).toHaveAttribute("data-state", "regressed");
+  await expect(visual).toContainText(catalog.messages["visual.processing"]);
+  for (let index = 9; index < 11; index++) await next.click();
+  await expect(visual).toHaveAttribute("data-state", "atomic-record");
+  await expect(visual).toContainText(catalog.messages["visual.atomic"]);
+  for (let index = 11; index < 14; index++) await next.click();
+  await expect(visual).toHaveAttribute("data-state", "rejected-after");
+  await expect(visual).toContainText(catalog.messages["visual.decisionReject"]);
+  await next.click();
+  await expect(visual).toHaveAttribute("data-state", "accepted-next");
+  await expect(visual).toContainText(
+    catalog.messages["visual.decisionAcceptNext"],
+  );
+  await expect(visual).toContainText(catalog.messages["visual.delivered"]);
+  await expect(visual).toContainText(catalog.messages["visual.guard45"]);
+  await page.reload();
+  await expect(page.locator(".lesson-panel h2")).toHaveText(
+    catalog.messages["step.accept-45.title"],
   );
 });

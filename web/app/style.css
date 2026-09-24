@@ -1153,10 +1153,66 @@ pre {
   font-weight: 700;
 }
 
+.recovery-visual {
+  background: #f4f7f5;
+}
+.recovery-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.recovery-visual-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.recovery-visual-card > strong {
+  color: var(--teal-dark);
+}
+.recovery-after {
+  border-inline-start: 4px solid var(--orange);
+}
+.recovery-visual[data-state="strong-restart"] .recovery-after,
+.recovery-visual[data-state="rejected-after"] .recovery-after,
+.recovery-visual[data-state="accepted-next"] .recovery-after,
+.recovery-visual[data-state="rebuild-before-ready"] .recovery-after {
+  border-inline-start-color: var(--teal);
+}
+.recovery-visual-card dl {
+  margin: 12px 0 0;
+}
+.recovery-visual-card dt {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.recovery-visual-card dd {
+  margin: 3px 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.recovery-visual-result {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.recovery-visual-result span {
+  overflow-wrap: anywhere;
+}
+.recovery-visual-result strong {
+  margin-inline-end: 8px;
+  color: var(--teal-dark);
+}
+
 @media (max-width: 640px) {
   .order-lane,
   .revision-gap-row,
-  .cancel-flow-row {
+  .cancel-flow-row,
+  .recovery-visual-grid {
     grid-template-columns: 1fr;
     gap: 5px;
   }

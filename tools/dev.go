@@ -28,6 +28,7 @@ var devCaseSlugs = map[string]string{
 	"fs-c05": "which-event-is-actually-newer",
 	"fs-c06": "the-read-succeeded-is-it-fresh-enough",
 	"fs-c07": "did-cancellation-stop-the-work",
+	"fs-c08": "it-restarted-what-did-it-forget",
 }
 
 func devCaseSlug(value string) (string, bool) {
