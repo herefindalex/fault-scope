@@ -9,6 +9,10 @@
 
 FaultScope berangkat dari bukti dan kontrak sistem untuk menentukan apa yang masih dapat dijamin setelah terjadi kegagalan. Setiap kasus terlebih dahulu menjelaskan sifat yang harus dipertahankan, lalu mencari batas yang perlu diperbaiki.
 
+![FaultScope: Delapan kasus yang telah diterbitkan pada antarmuka berbahasa Inggris](docs/images/cases-en.png)
+
+*Delapan kasus yang telah diterbitkan pada antarmuka berbahasa Inggris.*
+
 ## Jelajahi delapan kasus
 
 1. [Haruskah Anda mengirimnya lagi?](docs/cases/fs-c01.md) — Respons tidak tiba, tetapi VM mungkin sudah dibuat. Kontrak menentukan langkah yang aman berikutnya.
