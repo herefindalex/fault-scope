@@ -9,6 +9,10 @@
 
 O FaultScope parte das evidências e dos contratos do sistema para investigar o que ainda pode ser garantido após uma falha. Em cada caso, primeiro identificamos a propriedade a preservar e depois a fronteira que precisa de correção.
 
+![FaultScope: Os oito casos publicados na interface em inglês](docs/images/cases-en.png)
+
+*Os oito casos publicados na interface em inglês.*
+
 ## Explore os oito casos
 
 1. [Você deve enviar novamente?](docs/cases/fs-c01.md) — A resposta não chegou, mas a VM talvez já exista. O contrato determina o que você pode fazer agora.

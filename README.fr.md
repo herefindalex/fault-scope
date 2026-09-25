@@ -9,6 +9,10 @@
 
 FaultScope part des preuves disponibles et des contrats du système pour déterminer ce qui reste garanti après une panne. Chaque cas précise d’abord la propriété à préserver, puis la frontière où agir.
 
+![FaultScope: Les huit cas publiés dans l’interface en anglais](docs/images/cases-en.png)
+
+*Les huit cas publiés dans l’interface en anglais.*
+
 ## Explorer les huit cas
 
 1. [Faut-il le renvoyer ?](docs/cases/fs-c01.md) — La réponse n’arrive pas, mais la VM existe peut-être déjà. Le contrat détermine la suite possible.

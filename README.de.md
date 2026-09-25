@@ -9,6 +9,10 @@
 
 FaultScope geht von Belegen und Systemverträgen aus und fragt, was nach einem Fehler noch garantiert ist. Jeder Fall macht zuerst die zu bewahrende Eigenschaft klar und sucht dann die Grenze, an der eine Änderung nötig ist.
 
+![FaultScope: Die acht veröffentlichten Fälle in der englischen Oberfläche](docs/images/cases-en.png)
+
+*Die acht veröffentlichten Fälle in der englischen Oberfläche.*
+
 ## Acht Fälle erkunden
 
 1. [Sollten Sie es erneut senden?](docs/cases/fs-c01.md) — Die Antwort bleibt aus, doch die VM könnte bereits erstellt sein. Was als Nächstes zulässig ist, steht im Vertrag.

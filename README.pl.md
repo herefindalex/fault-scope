@@ -9,6 +9,10 @@
 
 FaultScope wychodzi od dostępnych dowodów i kontraktów systemu, aby ustalić, co nadal można zagwarantować po awarii. Każdy przypadek najpierw określa własność, którą trzeba zachować, a potem granicę wymagającą naprawy.
 
+![FaultScope: Osiem opublikowanych przypadków w angielskim interfejsie](docs/images/cases-en.png)
+
+*Osiem opublikowanych przypadków w angielskim interfejsie.*
+
 ## Poznaj osiem przypadków
 
 1. [Czy wysłać ponownie?](docs/cases/fs-c01.md) — Odpowiedź nie dotarła, ale maszyna VM mogła już powstać. To kontrakt określa, co wolno zrobić dalej.

@@ -9,6 +9,10 @@
 
 FaultScope bắt đầu từ bằng chứng và cam kết của hệ thống để xác định điều gì còn được bảo đảm sau sự cố. Mỗi tình huống làm rõ tính chất cần giữ trước khi tìm ranh giới cần sửa.
 
+![FaultScope: Tám tình huống đã phát hành trong giao diện tiếng Anh](docs/images/cases-en.png)
+
+*Tám tình huống đã phát hành trong giao diện tiếng Anh.*
+
 ## Khám phá tám tình huống
 
 1. [Bạn có nên gửi lại không?](docs/cases/fs-c01.md) — Không nhận được phản hồi, nhưng VM có thể đã được tạo. Hợp đồng quyết định bước tiếp theo có an toàn hay không.

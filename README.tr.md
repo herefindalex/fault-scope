@@ -9,6 +9,10 @@
 
 FaultScope, bir hatadan sonra nelerin hâlâ garanti edilebildiğini anlamak için kanıtlardan ve sistem sözleşmelerinden yola çıkar. Her vaka önce korunması gereken özelliği belirler, ardından müdahale edilmesi gereken sınırı arar.
 
+![FaultScope: İngilizce arayüzde yayımlanan sekiz vaka](docs/images/cases-en.png)
+
+*İngilizce arayüzde yayımlanan sekiz vaka.*
+
 ## Sekiz vakayı keşfedin
 
 1. [Yeniden göndermeli misiniz?](docs/cases/fs-c01.md) — Yanıt gelmedi ama VM çoktan oluşturulmuş olabilir. Sonraki güvenli adımı sözleşme belirler.

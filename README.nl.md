@@ -9,6 +9,10 @@
 
 FaultScope vertrekt vanuit bewijs en systeemcontracten om te onderzoeken wat na een storing nog gegarandeerd is. Elk geval maakt eerst duidelijk welke eigenschap behouden moet blijven en zoekt daarna de grens waar een ingreep nodig is.
 
+![FaultScope: De acht gepubliceerde gevallen in de Engelstalige interface](docs/images/cases-en.png)
+
+*De acht gepubliceerde gevallen in de Engelstalige interface.*
+
 ## Ontdek de acht gevallen
 
 1. [Moet je het opnieuw versturen?](docs/cases/fs-c01.md) — Het antwoord komt niet aan, maar de VM bestaat misschien al. Het contract bepaalt wat je nu veilig kunt doen.

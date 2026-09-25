@@ -9,6 +9,10 @@
 
 FaultScope parte dalle prove disponibili e dai contratti del sistema per capire cosa resta garantito dopo un guasto. Ogni caso chiarisce prima la proprietà da preservare, poi individua il confine su cui intervenire.
 
+![FaultScope: Gli otto casi pubblicati nell’interfaccia in inglese](docs/images/cases-en.png)
+
+*Gli otto casi pubblicati nell’interfaccia in inglese.*
+
 ## Esplora gli otto casi
 
 1. [Dovresti inviarlo di nuovo?](docs/cases/fs-c01.md) — La risposta non arriva, ma la VM potrebbe già esistere. È il contratto a dirti cosa puoi fare ora.
