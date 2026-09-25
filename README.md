@@ -9,6 +9,10 @@
 
 FaultScope helps engineers reason from evidence, contracts, properties, authority, durability, and failure boundaries. Each Case asks what a system actually guarantees before naming a repair pattern.
 
+![FaultScope English Cases page showing all eight published Cases](docs/images/cases-en.png)
+
+*The eight published Cases in the English interface.*
+
 ## Explore the Cases
 
 1. [Should You Send It Again?](docs/cases/fs-c01.md) — A `CreateVM` request returns no completion response. Decide what a retry can establish.
